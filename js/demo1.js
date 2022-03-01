@@ -241,7 +241,8 @@ function filtro() {
   let revisionApuestas = prompt(
     "Antes de finalizar, desea revisar sus apuestas por categoria o por valor? \n" +
       "1. Categoría \n" +
-      "2. Valor"
+      "2. Valor \n" +
+      "3. Salir"
   );
 
   switch (revisionApuestas) {
@@ -296,14 +297,14 @@ function filtro() {
       switch (valores) {
         case "1": {
           const lowBets = datosApostador.apuestas.filter((x) => x.valor < 1000);
-          console.log(lowBets);
+          alert(lowBets);
           break;
         }
         case "2": {
           const highBets = datosApostador.apuestas.filter(
             (x) => x.valor > 1500
           );
-          console.log(highBets);
+          alert(highBets);
           break;
         }
         default: {
@@ -312,6 +313,10 @@ function filtro() {
         }
       }
     }
+    case "3":
+      break;
+    default:
+      break;
   }
 }
 
