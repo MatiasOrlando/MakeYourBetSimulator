@@ -1,0 +1,185 @@
+h1 {
+  text-align: center;
+  background-color: rgb(60, 61, 61);
+  font-family: "Roboto";
+  font-weight: bolder;
+  color: white;
+  padding: 20px;
+}
+
+.tituloRegistro {
+  padding-left: 23px;
+  margin-bottom: 40px;
+  font-family: "Roboto";
+  background-color: rgb(60, 61, 61);
+  width: 350px;
+  border-radius: 5px;
+  margin-left: 25px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 30px;
+}
+
+.colorTitulos {
+  background-color: rgb(98, 100, 100);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-radius: 20px;
+  color: white;
+}
+.probando {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  vertical-align: text-bottom;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 60px;
+  justify-content: space-evenly;
+  margin-top: 80px;
+}
+.probando .topo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.probando .topo .btnAbajoDos {
+  font-family: "Roboto";
+}
+.probando .topo .pelotaSize,
+.probando .topo .caballosSize,
+.probando .topo .pokerSize {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+  display: block;
+  margin: 40px 40px;
+  transition: 1s ease;
+  border-radius: 25px;
+}
+.probando .topo #pelota:hover,
+.probando .topo #caballo:hover,
+.probando .topo #cartas:hover {
+  -webkit-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transform: scale(1.15);
+  transition: 1s ease;
+}
+.probando .topo .pcentrado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  width: 300px;
+  font-size: large;
+  font-weight: bold;
+  line-height: 2.5;
+  font-family: "Roboto", cursive;
+}
+
+.probando button {
+  margin-top: 25px;
+}
+
+.formContacto {
+  display: flex;
+  justify-content: center;
+  padding-left: 15px;
+  width: 400px;
+}
+
+.registro {
+  margin-top: 10px;
+  margin-bottom: 80px;
+  margin-left: 85px;
+  padding: 25px;
+  background-color: rgb(195, 200, 204);
+  width: 450px;
+  box-shadow: 0.5rem 0.5rem 0.2rem 0 #7e7e7e;
+  border-radius: 15px;
+}
+
+.contenedorDos {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.contenedorDos img {
+  width: 100%;
+  margin-top: -10px;
+}
+
+.formText {
+  display: flex;
+  flex-direction: row;
+}
+
+.textoInicial {
+  font-family: "Roboto";
+  padding-left: 20px;
+  line-height: 2.5;
+  text-align: center;
+  width: 700px;
+  margin-left: 200px;
+  margin-bottom: 60px;
+  padding-top: 90px;
+}
+
+.fuenteMake {
+  font-size: 30px;
+}
+
+body {
+  background-color: rgb(238, 241, 241);
+}
+
+h4 a {
+  color: white;
+  text-decoration: none;
+}
+
+h4 a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.perfilCentrado {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.perfilCentrado .perfilDesign {
+  padding: 35px;
+  background-color: rgb(195, 200, 204);
+  width: 80%;
+  box-shadow: 0.125rem 0.125rem 0.25rem 0 #7e7e7e;
+  border-radius: 25px;
+}
+
+.perfilCentrado .perfilDesign .btnPos {
+  margin-top: 30px;
+}
+
+.eventosPrincipales {
+  font-size: 30px;
+  margin-bottom: 40px;
+  padding-left: 85px;
+  font-family: "Roboto";
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: 90px;
+}
+
+h2 {
+  font-size: 25px;
+}
