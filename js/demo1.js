@@ -228,6 +228,7 @@ function ordenarApuestas() {
   console.log(orden);
 }
 
+// Funcion para calcular el valor total de todas las apuestas realizadas.
 function valorApuestaTotal() {
   for (const bet of datosApostador.apuestas) {
     apuestaTotal += bet.valor;
@@ -237,6 +238,7 @@ function valorApuestaTotal() {
   );
 }
 
+// Funcion que le permite al usuario filtrar apuestas realizadas por categoria o valor.
 function filtro() {
   let revisionApuestas = prompt(
     "Antes de finalizar, desea revisar sus apuestas por categoria o por valor? \n" +
@@ -297,14 +299,14 @@ function filtro() {
       switch (valores) {
         case "1": {
           const lowBets = datosApostador.apuestas.filter((x) => x.valor < 1000);
-          alert(lowBets);
+          console.log(lowBets);
           break;
         }
         case "2": {
           const highBets = datosApostador.apuestas.filter(
             (x) => x.valor > 1500
           );
-          alert(highBets);
+          console.log(highBets);
           break;
         }
         default: {
@@ -314,8 +316,14 @@ function filtro() {
       }
     }
     case "3":
+      {
+        alert("Gracias por participar, Hasta la próxima");
+      }
       break;
     default:
+      {
+        alert("Gracias por participar, Hasta la próxima");
+      }
       break;
   }
 }
@@ -338,8 +346,6 @@ if (sosMayor) {
   } else {
     alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
   }
-} else if (isNaN(edad)) {
-  alert("Debes ingresar valores númericos para indicar tu edad");
 } else {
   alert("Debes ser +18 años para apostar");
 }
