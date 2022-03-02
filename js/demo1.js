@@ -347,6 +347,8 @@ if (sosMayor) {
   } else {
     alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
   }
+} else if (isNaN(edad)) {
+  alert("Debes ingresar valores númericos para indicar tu edad");
 } else {
   alert("Debes ser +18 años para apostar");
 }
