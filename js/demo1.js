@@ -291,6 +291,7 @@ function filtro() {
           break;
         }
       }
+      break;
     }
     case "2": {
       let valores = prompt(
