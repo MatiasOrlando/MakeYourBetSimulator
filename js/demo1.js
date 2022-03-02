@@ -65,6 +65,7 @@ let valoresApuesta;
 let local;
 let edad;
 let apuestaTotal = 0;
+let priceFinalDiscount;
 
 // Funcion Bienvenida
 function welcome() {
@@ -159,7 +160,7 @@ function quieroApostar() {
         categoriaApuestas();
         mostrarPrecio();
         const apuesta = new Apuesta(
-          valoresApuesta,
+          priceFinalDiscount,
           categoriaDeApuesta,
           local.hora
         );
@@ -213,10 +214,7 @@ const restaDescuentoPromocional = (a, b) => a - b;
 function mostrarPrecio() {
   const priceOfTax = taxPrice(parseInt(valoresApuesta));
   const priceWithTax = suma(valoresApuesta, priceOfTax);
-  const priceFinalDiscount = restaDescuentoPromocional(
-    priceWithTax,
-    priceDiscount
-  );
+  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
   alert("Debes abonar: $" + priceFinalDiscount + " " + "Precio Final");
 }
 
@@ -234,7 +232,7 @@ function valorApuestaTotal() {
     apuestaTotal += bet.valor;
   }
   alert(
-    `El monto total de sus apuestas a pagar (Sin taxes incluidos) es de $${apuestaTotal}. Gracias por participar lo esperamos pronto`
+    `El monto total de sus apuestas a pagar es de $${apuestaTotal} (taxes incluidos). Gracias por participar lo esperamos pronto`
   );
 }
 
