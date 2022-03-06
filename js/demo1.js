@@ -66,6 +66,7 @@ let local;
 let edad;
 let apuestaTotal = 0;
 let priceFinalDiscount;
+let apuesta;
 
 // Funcion Bienvenida
 function welcome() {
@@ -159,7 +160,7 @@ function quieroApostar() {
       {
         categoriaApuestas();
         mostrarPrecio();
-        const apuesta = new Apuesta(
+        apuesta = new Apuesta(
           priceFinalDiscount,
           categoriaDeApuesta,
           local.hora
@@ -224,6 +225,38 @@ function ordenarApuestas() {
     return a.valor - b.valor;
   });
   console.log(orden);
+}
+
+// Funcion que permite borrar al usuario una apuesta realizada.
+
+function borrarApuesta() {
+  let borrarApuesta = prompt(
+    "Desea eliminar alguna apuesta realizada? \n" + "1. Si \n" + "2. No"
+  );
+
+  switch (borrarApuesta) {
+    case "1": {
+      let valorApuestaBorrada = parseInt(
+        prompt("Ingrese el valor de la apuesta que desea eliminar")
+      );
+
+      let apuestaElegida = datosApostador.apuestas.find(
+        (x) => x.valor === valorApuestaBorrada
+      );
+
+      if (apuestaElegida) {
+        const index = datosApostador.apuestas.indexOf(apuestaElegida);
+
+        datosApostador.apuestas.splice(index, 1);
+      } else {
+        alert("Apuesta NO EXISTE");
+      }
+      break;
+    }
+    case "2":
+    default:
+      break;
+  }
 }
 
 // Funcion para calcular el valor total de todas las apuestas realizadas.
@@ -315,10 +348,6 @@ function filtro() {
       }
     }
     case "3":
-      {
-        alert("Gracias por participar, Hasta la próxima");
-      }
-      break;
     default:
       {
         alert("Gracias por participar, Hasta la próxima");
@@ -339,6 +368,7 @@ if (sosMayor) {
       "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
     );
     quieroApostar();
+    borrarApuesta();
     filtro();
     ordenarApuestas();
     valorApuestaTotal();
