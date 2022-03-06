@@ -133,7 +133,7 @@ function apuestasCaballos() {
 
 // Función Contenedora de los valores para las apuestas de la Categoría Poker.
 function apuestasPoker() {
-  alert("Poker in Vegas 20:00  \n" + "Apuesta from $1500 to $5000");
+  alert("Poker in Vegas 20:00  \n" + "Apuestas desde $1500 to $5000");
   valoresApuesta = parseInt(
     prompt("Menú: \n" + "$1500 \n" + "$3500 \n" + "$5000 \n")
   );

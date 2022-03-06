@@ -112,7 +112,7 @@ h1 {
   text-align: center;
 }
 
-.contenedorDos img {
+.onlineGames {
   width: 100%;
   margin-top: -10px;
 }
@@ -151,12 +151,16 @@ h4 a:hover {
   color: white;
 }
 
-.perfilCentrado {
+.perfilCentrado1,
+.perfilCentrado2,
+.perfilCentrado3 {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
 }
-.perfilCentrado .perfilDesign {
+.perfilCentrado1 .perfilDesign,
+.perfilCentrado2 .perfilDesign,
+.perfilCentrado3 .perfilDesign {
   padding: 35px;
   background-color: rgb(195, 200, 204);
   width: 80%;
@@ -164,7 +168,9 @@ h4 a:hover {
   border-radius: 25px;
 }
 
-.perfilCentrado .perfilDesign .btnPos {
+.perfilCentrado1 .perfilDesign .btnPos,
+.perfilCentrado2 .perfilDesign .btnPos,
+.perfilCentrado3 .perfilDesign .btnPos {
   margin-top: 30px;
 }
 
@@ -181,5 +187,16 @@ footer {
 }
 
 h2 {
-  font-size: 25px;
+  font-size: 30px;
+}
+
+.divsJuegos {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.h3Juegos {
+  font-size: 23px;
 }
