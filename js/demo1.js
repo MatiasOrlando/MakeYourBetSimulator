@@ -41,7 +41,7 @@ class Apuesta {
 }
 
 // Clase que indica el horario
-class Tienda {
+class Reloj {
   constructor(hora) {
     this.hora = hora;
   }
@@ -62,11 +62,13 @@ let datosApostador;
 let respuestaMenuDos;
 const priceDiscount = 50;
 let valoresApuesta;
-let local;
+let horario;
 let edad;
 let apuestaTotal = 0;
 let priceFinalDiscount;
 let apuesta;
+let valorApuestaBorrada;
+let apuestaElegida;
 
 // Funcion Bienvenida
 function welcome() {
@@ -87,7 +89,7 @@ function welcome() {
 function ingresarHorario() {
   const hora = parseInt(prompt("Ingrese horario en punto para APOSTAR"));
   alert("Usted ha elegido el siguiente horario: " + hora);
-  local = new Tienda(hora);
+  horario = new Reloj(hora);
   return (
     (parseInt(hora) >= 8 && parseInt(hora) <= 12) ||
     (parseInt(hora) >= 15 && parseInt(hora) <= 23)
@@ -163,7 +165,7 @@ function quieroApostar() {
         apuesta = new Apuesta(
           priceFinalDiscount,
           categoriaDeApuesta,
-          local.hora
+          horario.hora
         );
         datosApostador.apuestas.push(apuesta);
         if (continuarApostando()) {
@@ -236,11 +238,11 @@ function borrarApuesta() {
 
   switch (borrarApuesta) {
     case "1": {
-      let valorApuestaBorrada = parseInt(
+      valorApuestaBorrada = parseInt(
         prompt("Ingrese el valor de la apuesta que desea eliminar")
       );
 
-      let apuestaElegida = datosApostador.apuestas.find(
+      apuestaElegida = datosApostador.apuestas.find(
         (x) => x.valor === valorApuestaBorrada
       );
 
@@ -249,13 +251,33 @@ function borrarApuesta() {
 
         datosApostador.apuestas.splice(index, 1);
       } else {
-        alert("Apuesta NO EXISTE");
+        borrarApuestaErrorUsuario();
       }
       break;
     }
     case "2":
     default:
       break;
+  }
+}
+
+// Funcion que le permite reingresar al usuario el valor de la apuesta en caso de cometer un Error en el valor ingresado
+function borrarApuestaErrorUsuario() {
+  while (!apuestaElegida) {
+    alert("Apuesta NO EXISTE");
+    valorApuestaBorrada = parseInt(
+      prompt("Ingrese nuevamente el valor de la apuesta que desea eliminar")
+    );
+
+    apuestaElegida = datosApostador.apuestas.find(
+      (x) => x.valor === valorApuestaBorrada
+    );
+
+    if (apuestaElegida) {
+      const index = datosApostador.apuestas.indexOf(apuestaElegida);
+
+      datosApostador.apuestas.splice(index, 1);
+    }
   }
 }
 
@@ -362,7 +384,7 @@ datosApostador.mostrarDatos();
 const sosMayor = datosApostador.esMayor();
 if (sosMayor) {
   ingresarHorario();
-  const horarioHabilitado = local.estaAbierto();
+  const horarioHabilitado = horario.estaAbierto();
   if (horarioHabilitado) {
     respuestaMenuDos = prompt(
       "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"

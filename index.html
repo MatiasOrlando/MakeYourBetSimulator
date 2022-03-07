@@ -34,7 +34,7 @@
                     <h2 class="tituloRegistro">Registrate para apostar</h2>
                 </div>
                 <div class="formContacto">
-                    <form action="javascript:mostrarDatos" class="row g-3">
+                    <form action="" class="row g-3" id="formUsuarioApostador">
                         <div class="col-md-6">
                             <label for="inputEmail4" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="inputName1">
@@ -45,17 +45,16 @@
                         </div>
                         <div class="col-12">
                             <label for="inputAddress" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputAddress"
-                                placeholder="matiasxxx@gmail.com">
+                            <input type="email" class="form-control" id="inputEmail1" placeholder="xxx@gmail.com">
                         </div>
                         <div class="col-md-6">
                             <label for="inputCity" class="form-label">País
                             </label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" id="inputCountry1">
                         </div>
                         <div class="col-md-4">
                             <label for="inputState" class="form-label">Ciudad</label>
-                            <select id="inputState" class="form-select">
+                            <select id="inputState1" class="form-select">
                                 <option selected>Elegir...</option>
                                 <option>Buenos Aires</option>
                                 <option>Cordoba</option>
@@ -64,18 +63,18 @@
                         </div>
                         <div class="col-md-2">
                             <label for="inputZip" class="form-label">Edad</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputAge1">
                         </div>
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="inputAgeCheck1">
                                 <label class="form-check-label" for="gridCheck">
                                     +18
                                 </label>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Registrarme</button>
+                            <button type="button" class="btn btn-primary" id="buttonForm1">Registrarme</button>
                         </div>
                     </form>
                 </div>
@@ -192,7 +191,7 @@
                         </div>
                         <div class="col col-lg-2">
                             <div class="btnPos">
-                                <button type="submit" class="btn btn-outline-dark mb-4">
+                                <button type="button" class="btn btn-outline-dark mb-4" id="buttonFutbol1">
                                     Ver más
                                 </button>
                             </div>
@@ -220,7 +219,7 @@
                         </div>
                         <div class="col col-lg-2">
                             <div class="btnPos">
-                                <button type="submit" class="btn btn-outline-dark mb-4">
+                                <button type="button" class="btn btn-outline-dark mb-4" id="buttonPoker1">
                                     Ver más
                                 </button>
                             </div>
@@ -251,7 +250,7 @@
                         </div>
                         <div class="col col-lg-2">
                             <div class="btnPos">
-                                <button type="submit" class="btn btn-outline-dark mb-4">
+                                <button type="button" class="btn btn-outline-dark mb-4" id="buttonCaballos1">
                                     Ver más
                                 </button>
                             </div>
@@ -260,6 +259,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
