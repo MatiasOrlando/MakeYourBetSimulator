@@ -200,3 +200,21 @@ h2 {
 .h3Juegos {
   font-size: 22px;
 }
+
+.presentation {
+  font-family: "Roboto";
+  line-height: 2.5;
+  text-align: center;
+  font-size: 18px;
+}
+
+.tituloWelcome {
+  font-size: 22px;
+  font-family: "Roboto";
+  text-align: center;
+  padding: 10px;
+  background-color: rgb(60, 61, 61);
+  border-radius: 5px;
+  color: white;
+  width: 380px;
+}
