@@ -70,6 +70,11 @@ let apuesta;
 let valorApuestaBorrada;
 let apuestaElegida;
 
+//Funcion para guardar datos en localStorage
+const guardarLocal = (categoria, valor) => {
+  localStorage.setItem(categoria, valor);
+};
+
 // Funcion Bienvenida
 function welcome() {
   const usuarioApostador = [];
@@ -82,6 +87,10 @@ function welcome() {
   usuarioApostador.push(datosApostador);
 
   console.log(usuarioApostador);
+
+  for (const datos of usuarioApostador) {
+    guardarLocal("Informacion cliente: ", JSON.stringify(datos));
+  }
 }
 
 // Funcion Solicita Horario para verificar que las mesas esten abiertas a la hora de apostar
@@ -402,3 +411,7 @@ if (sosMayor) {
 } else {
   alert("Debes ser +18 años para apostar");
 }
+
+//Informacion de las apuestas realizadas a guardar en localStorage
+
+guardarLocal("Apuestas realizadas: ", JSON.stringify(datosApostador.apuestas));
