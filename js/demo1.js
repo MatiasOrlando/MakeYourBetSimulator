@@ -115,8 +115,7 @@ function welcome() {
 // Funcion Solicita Horario para verificar que las mesas esten abiertas a la hora de apostar
 
 function ingresarHorario() {
-  const hora = document.querySelector("#inputTime1");
-  alert("Usted ha elegido el siguiente horario: " + hora);
+  const hora = document.querySelector("#inputTime1").value;
   horario = new Reloj(hora);
   return (
     (parseInt(hora) >= 8 && parseInt(hora) <= 12) ||

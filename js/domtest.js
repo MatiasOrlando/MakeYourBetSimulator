@@ -181,17 +181,27 @@ const buttonForm = document.querySelector("#buttonForm1");
 
 buttonForm.addEventListener("click", () => {
   welcome();
+  validarRegistro();
+});
+
+function validarRegistro() {
   const sosMayor = datosApostador.esMayor();
   if (sosMayor) {
-    respuestaMenuDos = prompt(
-      "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
-    );
-  } else if (isNaN(edad)) {
+    ingresarHorario();
+    const horarioHabilitado = horario.estaAbierto();
+    if (horarioHabilitado) {
+      respuestaMenuDos = prompt(
+        "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
+      );
+    } else {
+      alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
+    }
+  } else if (isNaN(datosApostador.edad)) {
     alert("Debes ingresar valores númericos para indicar tu edad");
   } else {
     alert("Debes ser +18 años para apostar");
   }
-});
+}
 
 // function recorgerDatos() {
 //   const inputName = document.querySelector("#inputName1").value;
