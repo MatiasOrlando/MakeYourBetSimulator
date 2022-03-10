@@ -2,27 +2,16 @@
 
 // Clase Apostador
 class Apostador {
-  constructor(nombre, apellido, edad, mail) {
+  constructor(nombre, apellido, edad, mail, ciudad, pais) {
     this.nombre = nombre;
     this.apellido = apellido;
     this.edad = edad;
     this.mail = mail;
+    this.ciudad = ciudad;
+    this.pais = pais;
     this.apuestas = [];
   }
-  mostrarDatos = () => {
-    alert(
-      "Bienvenido a Make your Bet: " +
-        this.nombre +
-        " " +
-        this.apellido +
-        "\n" +
-        "Edad: " +
-        this.edad +
-        "\n" +
-        "Mail: " +
-        this.mail
-    );
-  };
+
   esMayor = () => {
     return parseInt(this.edad) >= 18;
   };
@@ -69,6 +58,8 @@ let priceFinalDiscount;
 let apuesta;
 let valorApuestaBorrada;
 let apuestaElegida;
+let tituloBienvenida;
+let fraseBienvenida;
 
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
@@ -78,12 +69,14 @@ const guardarLocal = (categoria, valor) => {
 // Funcion Bienvenida
 function welcome() {
   const usuarioApostador = [];
-  const nombre = prompt("Ingrese su nombre");
-  const apellido = prompt("Ingrese su apellido");
-  const edad = prompt("Ingrese su edad (Valores númericos)");
-  const mail = prompt("Ingrese su mail");
+  const nombre = document.querySelector("#inputName1").value;
+  const apellido = document.querySelector("#inputLastName1").value;
+  const edad = document.querySelector("#inputAge1").value;
+  const mail = document.querySelector("#inputEmail1").value;
+  const ciudad = document.querySelector("#inputState1").value;
+  const pais = document.querySelector("#inputCountry1").value;
 
-  datosApostador = new Apostador(nombre, apellido, edad, mail);
+  datosApostador = new Apostador(nombre, apellido, edad, mail, ciudad, pais);
   usuarioApostador.push(datosApostador);
 
   console.log(usuarioApostador);
@@ -91,12 +84,38 @@ function welcome() {
   for (const datos of usuarioApostador) {
     guardarLocal("Informacion cliente: ", JSON.stringify(datos));
   }
+
+  const formContacto = document.querySelector(".formContacto");
+  const tituloForm = document.querySelector(".estiloTituloDos");
+  formContacto.remove();
+  tituloForm.remove();
+
+  const divBienvenida = document.createElement("div");
+  fraseBienvenida = document.createElement("p");
+  const registro = document.querySelector(".registro");
+  tituloBienvenida = document.createElement("h2");
+
+  tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
+  fraseBienvenida.innerText = `Nombre Completo: ${nombre} ${apellido}
+        Edad: ${edad}
+        Mail: ${mail}
+        Ciudad: ${ciudad}
+        País: ${pais}
+        Gracias por registrarte, es hora de jugar.`;
+
+  fraseBienvenida.classList.add("presentation");
+  tituloBienvenida.classList.add("tituloWelcome");
+  divBienvenida.style.paddingTop = "30px";
+  divBienvenida.style.paddingLeft = "10px";
+  divBienvenida.appendChild(tituloBienvenida);
+  divBienvenida.appendChild(fraseBienvenida);
+  registro.appendChild(divBienvenida);
 }
 
 // Funcion Solicita Horario para verificar que las mesas esten abiertas a la hora de apostar
 
 function ingresarHorario() {
-  const hora = parseInt(prompt("Ingrese horario en punto para APOSTAR"));
+  const hora = document.querySelector("#inputTime1");
   alert("Usted ha elegido el siguiente horario: " + hora);
   horario = new Reloj(hora);
   return (
@@ -388,30 +407,30 @@ function filtro() {
 }
 
 //Orden de Ejecución
-welcome();
-datosApostador.mostrarDatos();
-const sosMayor = datosApostador.esMayor();
-if (sosMayor) {
-  ingresarHorario();
-  const horarioHabilitado = horario.estaAbierto();
-  if (horarioHabilitado) {
-    respuestaMenuDos = prompt(
-      "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
-    );
-    quieroApostar();
-    borrarApuesta();
-    filtro();
-    ordenarApuestas();
-    valorApuestaTotal();
-  } else {
-    alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
-  }
-} else if (isNaN(edad)) {
-  alert("Debes ingresar valores númericos para indicar tu edad");
-} else {
-  alert("Debes ser +18 años para apostar");
-}
+// welcome();
+// datosApostador.mostrarDatos();
+// const sosMayor = datosApostador.esMayor();
+// if (sosMayor) {
+//   ingresarHorario();
+//   const horarioHabilitado = horario.estaAbierto();
+//   if (horarioHabilitado) {
+//     respuestaMenuDos = prompt(
+//       "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
+//     );
+//     quieroApostar();
+//     borrarApuesta();
+//     filtro();
+//     ordenarApuestas();
+//     valorApuestaTotal();
+//   } else {
+//     alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
+//   }
+// } else if (isNaN(edad)) {
+//   alert("Debes ingresar valores númericos para indicar tu edad");
+// } else {
+//   alert("Debes ser +18 años para apostar");
+// }
 
 //Informacion de las apuestas realizadas a guardar en localStorage
 
-guardarLocal("Apuestas realizadas: ", JSON.stringify(datosApostador.apuestas));
+// guardarLocal("Apuestas realizadas: ", JSON.stringify(datosApostador.apuestas));

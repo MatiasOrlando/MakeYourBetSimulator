@@ -180,40 +180,25 @@ const usuario = document.querySelector("#formUsuarioApostador");
 const buttonForm = document.querySelector("#buttonForm1");
 
 buttonForm.addEventListener("click", () => {
-  recorgerDatos();
+  welcome();
+  const sosMayor = datosApostador.esMayor();
+  if (sosMayor) {
+    respuestaMenuDos = prompt(
+      "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
+    );
+  } else if (isNaN(edad)) {
+    alert("Debes ingresar valores númericos para indicar tu edad");
+  } else {
+    alert("Debes ser +18 años para apostar");
+  }
 });
 
-function recorgerDatos() {
-  const inputName = document.querySelector("#inputName1").value;
-  const inputLastName = document.querySelector("#inputLastName1").value;
-  const inputEmail = document.querySelector("#inputEmail1").value;
-  const inputCountry = document.querySelector("#inputCountry1").value;
-  const inputState = document.querySelector("#inputState1").value;
-  const inputAge = document.querySelector("#inputAge1").value;
+// function recorgerDatos() {
+//   const inputName = document.querySelector("#inputName1").value;
+//   const inputLastName = document.querySelector("#inputLastName1").value;
+//   const inputEmail = document.querySelector("#inputEmail1").value;
+//   const inputCountry = document.querySelector("#inputCountry1").value;
+//   const inputState = document.querySelector("#inputState1").value;
+//   const inputAge = document.querySelector("#inputAge1").value;
 
-  const formContacto = document.querySelector(".formContacto");
-  const tituloForm = document.querySelector(".estiloTituloDos");
-  formContacto.remove();
-  tituloForm.remove();
-
-  const divBienvenida = document.createElement("div");
-  const fraseBienvenida = document.createElement("p");
-  const registro = document.querySelector(".registro");
-  const tituloBienvenida = document.createElement("h2");
-
-  tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
-  fraseBienvenida.innerText = `Nombre Completo: ${inputName} ${inputLastName} 
-      Edad: ${inputAge}
-      Mail: ${inputEmail} 
-      Ciudad: ${inputState} 
-      País: ${inputCountry}
-      Gracias por registrarte, es hora de jugar.`;
-
-  fraseBienvenida.classList.add("presentation");
-  tituloBienvenida.classList.add("tituloWelcome");
-  divBienvenida.style.paddingTop = "30px";
-  divBienvenida.style.paddingLeft = "10px";
-  divBienvenida.appendChild(tituloBienvenida);
-  divBienvenida.appendChild(fraseBienvenida);
-  registro.appendChild(divBienvenida);
-}
+//
