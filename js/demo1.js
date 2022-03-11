@@ -62,6 +62,7 @@ let fraseBienvenida;
 const usuarioApostador = [];
 let listaApostadores = [];
 let registroValido = false;
+let montoTotalPagar = 0;
 
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
@@ -255,12 +256,6 @@ const suma = (a, b) => Number(a) + Number(b);
 const restaDescuentoPromocional = (a, b) => a - b;
 
 // Funcion que indica el precio final a pagar de la apuesta con sus respectivos descuentos y taxes aplicados
-function mostrarPrecio() {
-  const priceOfTax = taxPrice(parseInt(valoresApuesta));
-  const priceWithTax = suma(valoresApuesta, priceOfTax);
-  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
-  alert("Debes abonar: $" + priceFinalDiscount + " " + "Precio Final");
-}
 
 // Funcion que permite ordenar las apuestas filtradas segun su valor
 function ordenarApuestas() {

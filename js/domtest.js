@@ -209,15 +209,16 @@ function validarRegistro() {
 const futbolBetButton = document.querySelector("#apuestasFutbol1");
 const pokerBetButton = document.querySelector("#apuestasPoker1");
 
-function desplegarApuestas(valor1, valor2, valor3, titulo) {
-  // if (!registroValido) {
-  //   alert("Debe estar registrado para continuar");
-  //   return false;
-  // }
+function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
+  if (!registroValido) {
+    alert("Debe estar registrado para continuar");
+    return false;
+  }
   const divApuesta = document.querySelector("#categoriaApuesta");
   let valorApuesta1 = document.querySelector("#apuestaValor1");
-  const valorApuesta2 = document.querySelector("#apuestaValor2");
-  const valorApuesta3 = document.querySelector("#apuestaValor3");
+  let valorApuesta2 = document.querySelector("#apuestaValor2");
+  let valorApuesta3 = document.querySelector("#apuestaValor3");
+
   const tituloApuesta = document.querySelector("#tituloApuesta");
 
   valorApuesta1.innerText = valor1;
@@ -226,13 +227,56 @@ function desplegarApuestas(valor1, valor2, valor3, titulo) {
   tituloApuesta.innerText = titulo;
 
   valorApuesta1.outerHTML = valorApuesta1.outerHTML;
+  valorApuesta2.outerHTML = valorApuesta2.outerHTML;
+  valorApuesta3.outerHTML = valorApuesta3.outerHTML;
 
   valorApuesta1 = document.querySelector("#apuestaValor1");
-  valorApuesta1.addEventListener("click", clickvalor1);
-  function clickvalor1() {
-    alert("holaaaa");
+  valorApuesta2 = document.querySelector("#apuestaValor2");
+  valorApuesta3 = document.querySelector("#apuestaValor3");
+
+  valorApuesta1.addEventListener("click", clickvalor);
+
+  valorApuesta2.addEventListener("click", clickvalor);
+
+  valorApuesta3.addEventListener("click", clickvalor);
+  function clickvalor() {
+    const divApuestasRealizadas = document.querySelector("#apuestasRealizadas");
+    divApuestasRealizadas.style.display = "block";
+    const listaApuestas = document.querySelector("#listaApuestasRealizadas");
+    const apuestaNueva = document.createElement("li");
+    const botonBorrarApuesta = document.createElement("button");
+    botonBorrarApuesta.innerText = "Borrar";
+
+    const valorFinalDeApuesta = calcularPrecioFinal(
+      this.innerText.replace("$", "")
+    );
+    montoTotalPagar += valorFinalDeApuesta;
+    apuestaNueva.innerText = `${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar es $${valorFinalDeApuesta} .`;
+
+    datosApostador.apuestas.push(
+      new Apuesta(valorFinalDeApuesta, categoria.replace("Categoria", ""), hora)
+    );
+    const apuestasRealizadasValor = document.querySelector(
+      "#montoTotalApuestas"
+    );
+    apuestasRealizadasValor.innerText = montoTotalPagar;
+
+    apuestaNueva.appendChild(botonBorrarApuesta);
+    listaApuestas.appendChild(apuestaNueva);
+    botonBorrarApuesta.addEventListener("click", () => {
+      montoTotalPagar -= valorFinalDeApuesta;
+      apuestasRealizadasValor.innerText = montoTotalPagar;
+      apuestaNueva.remove();
+    });
   }
   divApuesta.style.display = "block";
+}
+
+function calcularPrecioFinal(precio) {
+  const priceOfTax = taxPrice(parseInt(precio));
+  const priceWithTax = suma(precio, priceOfTax);
+  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
+  return priceFinalDiscount;
 }
 
 futbolBetButton.addEventListener("click", () => {
@@ -240,7 +284,8 @@ futbolBetButton.addEventListener("click", () => {
     "$500",
     "$1500",
     "$3000",
-    "Champions League Match 22:00  Apuestas desde $500 hasta $3000 "
+    "Champions League Match 22:00  Apuestas desde $500 hasta $3000 ",
+    "Categoria : Futbol"
   );
 });
 
@@ -249,7 +294,8 @@ pokerBetButton.addEventListener("click", () => {
     "$1500",
     "$3500",
     "$5000",
-    "Poker in Vegas 20:00 Apuestas desde $1500 to $5000"
+    "Poker in Vegas 20:00 Apuestas desde $1500 to $5000",
+    "Categoria : Poker"
   );
 });
 
@@ -258,6 +304,7 @@ caballosBetButton.addEventListener("click", () => {
     "$300",
     "$1000",
     "$2000",
-    "Horseback riding Leagues 19:00  Apuestas desde $300 hasta $2000"
+    "Horseback riding Leagues 19:00  Apuestas desde $300 hasta $2000",
+    "Categoria : Caballos"
   );
 });
