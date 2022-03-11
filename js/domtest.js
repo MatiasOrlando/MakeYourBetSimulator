@@ -180,35 +180,84 @@ const usuario = document.querySelector("#formUsuarioApostador");
 const buttonForm = document.querySelector("#buttonForm1");
 
 buttonForm.addEventListener("click", () => {
-  welcome();
-  validarRegistro();
+  leerDatos();
+  registroValido = validarRegistro();
+  if (registroValido) {
+    welcome();
+  }
 });
 
 function validarRegistro() {
   const sosMayor = datosApostador.esMayor();
   if (sosMayor) {
-    ingresarHorario();
+    horario = new Reloj(hora);
     const horarioHabilitado = horario.estaAbierto();
-    if (horarioHabilitado) {
-      respuestaMenuDos = prompt(
-        "Menú: \n" + "1. Quieres Apostar? \n" + "2. Salir \n"
-      );
-    } else {
+    if (!horarioHabilitado) {
       alert("Para apostar solo en horarios habilitados: 8-12 & 15-23");
+      return false;
     }
+    return true;
   } else if (isNaN(datosApostador.edad)) {
     alert("Debes ingresar valores númericos para indicar tu edad");
+    return false;
   } else {
     alert("Debes ser +18 años para apostar");
+    return false;
   }
 }
 
-// function recorgerDatos() {
-//   const inputName = document.querySelector("#inputName1").value;
-//   const inputLastName = document.querySelector("#inputLastName1").value;
-//   const inputEmail = document.querySelector("#inputEmail1").value;
-//   const inputCountry = document.querySelector("#inputCountry1").value;
-//   const inputState = document.querySelector("#inputState1").value;
-//   const inputAge = document.querySelector("#inputAge1").value;
+const futbolBetButton = document.querySelector("#apuestasFutbol1");
+const pokerBetButton = document.querySelector("#apuestasPoker1");
 
-//
+function desplegarApuestas(valor1, valor2, valor3, titulo) {
+  // if (!registroValido) {
+  //   alert("Debe estar registrado para continuar");
+  //   return false;
+  // }
+  const divApuesta = document.querySelector("#categoriaApuesta");
+  let valorApuesta1 = document.querySelector("#apuestaValor1");
+  const valorApuesta2 = document.querySelector("#apuestaValor2");
+  const valorApuesta3 = document.querySelector("#apuestaValor3");
+  const tituloApuesta = document.querySelector("#tituloApuesta");
+
+  valorApuesta1.innerText = valor1;
+  valorApuesta2.innerText = valor2;
+  valorApuesta3.innerText = valor3;
+  tituloApuesta.innerText = titulo;
+
+  valorApuesta1.outerHTML = valorApuesta1.outerHTML;
+
+  valorApuesta1 = document.querySelector("#apuestaValor1");
+  valorApuesta1.addEventListener("click", clickvalor1);
+  function clickvalor1() {
+    alert("holaaaa");
+  }
+  divApuesta.style.display = "block";
+}
+
+futbolBetButton.addEventListener("click", () => {
+  desplegarApuestas(
+    "$500",
+    "$1500",
+    "$3000",
+    "Champions League Match 22:00  Apuestas desde $500 hasta $3000 "
+  );
+});
+
+pokerBetButton.addEventListener("click", () => {
+  desplegarApuestas(
+    "$1500",
+    "$3500",
+    "$5000",
+    "Poker in Vegas 20:00 Apuestas desde $1500 to $5000"
+  );
+});
+
+caballosBetButton.addEventListener("click", () => {
+  desplegarApuestas(
+    "$300",
+    "$1000",
+    "$2000",
+    "Horseback riding Leagues 19:00  Apuestas desde $300 hasta $2000"
+  );
+});

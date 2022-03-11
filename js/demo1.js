@@ -52,7 +52,6 @@ let respuestaMenuDos;
 const priceDiscount = 50;
 let valoresApuesta;
 let horario;
-let edad;
 let apuestaTotal = 0;
 let priceFinalDiscount;
 let apuesta;
@@ -60,30 +59,55 @@ let valorApuestaBorrada;
 let apuestaElegida;
 let tituloBienvenida;
 let fraseBienvenida;
+const usuarioApostador = [];
+let listaApostadores = [];
+let registroValido = false;
 
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
   localStorage.setItem(categoria, valor);
 };
 
-// Funcion Bienvenida
-function welcome() {
-  const usuarioApostador = [];
-  const nombre = document.querySelector("#inputName1").value;
-  const apellido = document.querySelector("#inputLastName1").value;
-  const edad = document.querySelector("#inputAge1").value;
-  const mail = document.querySelector("#inputEmail1").value;
-  const ciudad = document.querySelector("#inputState1").value;
-  const pais = document.querySelector("#inputCountry1").value;
+// Funcion Datos Personales
 
+let nombre;
+let apellido;
+let edad;
+let mail;
+let ciudad;
+let pais;
+let hora;
+
+function leerDatos() {
+  nombre = document.querySelector("#inputName1").value;
+  apellido = document.querySelector("#inputLastName1").value;
+  edad = document.querySelector("#inputAge1").value;
+  mail = document.querySelector("#inputEmail1").value;
+  ciudad = document.querySelector("#inputState1").value;
+  pais = document.querySelector("#inputCountry1").value;
+  hora = document.querySelector("#inputTime1").value;
   datosApostador = new Apostador(nombre, apellido, edad, mail, ciudad, pais);
   usuarioApostador.push(datosApostador);
 
   console.log(usuarioApostador);
+}
+
+function obtenerLocal() {
+  listaApostadores = JSON.parse(localStorage.getItem("Informacion cliente: "));
+  if (listaApostadores === null) {
+    listaApostadores = [];
+  }
+}
+
+// Funcion Bienvenida
+function welcome() {
+  obtenerLocal();
 
   for (const datos of usuarioApostador) {
-    guardarLocal("Informacion cliente: ", JSON.stringify(datos));
+    listaApostadores.push(datos);
   }
+
+  guardarLocal("Informacion cliente: ", JSON.stringify(listaApostadores));
 
   const formContacto = document.querySelector(".formContacto");
   const tituloForm = document.querySelector(".estiloTituloDos");
@@ -112,16 +136,6 @@ function welcome() {
   registro.appendChild(divBienvenida);
 }
 
-// Funcion Solicita Horario para verificar que las mesas esten abiertas a la hora de apostar
-
-function ingresarHorario() {
-  const hora = document.querySelector("#inputTime1").value;
-  horario = new Reloj(hora);
-  return (
-    (parseInt(hora) >= 8 && parseInt(hora) <= 12) ||
-    (parseInt(hora) >= 15 && parseInt(hora) <= 23)
-  );
-}
 // Función Contenedora de los valores para las apuestas de la Categoría Futbol
 function apuestasFutbol() {
   alert(
