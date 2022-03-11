@@ -63,6 +63,7 @@ const usuarioApostador = [];
 let listaApostadores = [];
 let registroValido = false;
 let montoTotalPagar = 0;
+let registro;
 
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
@@ -117,7 +118,7 @@ function welcome() {
 
   const divBienvenida = document.createElement("div");
   fraseBienvenida = document.createElement("p");
-  const registro = document.querySelector(".registro");
+  registro = document.querySelector(".registro");
   tituloBienvenida = document.createElement("h2");
 
   tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;

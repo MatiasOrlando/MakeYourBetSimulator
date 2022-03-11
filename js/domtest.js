@@ -198,10 +198,20 @@ function validarRegistro() {
     }
     return true;
   } else if (isNaN(datosApostador.edad)) {
-    alert("Debes ingresar valores númericos para indicar tu edad");
+    const tituloInvalidAge = document.createElement("h2");
+    tituloInvalidAge.classList.add("tituloWelcomeInvalidAge");
+    tituloInvalidAge.innerText = "INGRESE UNA EDAD VÁLIDA PARA APOSTAR";
+    tituloFormRegistro.remove();
+    formUsuarioApostador.remove();
+    formRegistro.appendChild(tituloInvalidAge);
     return false;
   } else {
-    alert("Debes ser +18 años para apostar");
+    const tituloUnderAge = document.createElement("h2");
+    tituloUnderAge.classList.add("tituloWelcomeUnderAge");
+    tituloUnderAge.innerText = "DEBES SER MAYOR DE 18 AÑOS PARA APOSTAR";
+    tituloFormRegistro.remove();
+    formUsuarioApostador.remove();
+    formRegistro.appendChild(tituloUnderAge);
     return false;
   }
 }
@@ -251,18 +261,19 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       this.innerText.replace("$", "")
     );
     montoTotalPagar += valorFinalDeApuesta;
-    apuestaNueva.innerText = `${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar es $${valorFinalDeApuesta} .`;
+    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es $${valorFinalDeApuesta}.`;
 
     datosApostador.apuestas.push(
-      new Apuesta(valorFinalDeApuesta, categoria.replace("Categoria", ""), hora)
+      new Apuesta(valorFinalDeApuesta, categoria, hora)
     );
     const apuestasRealizadasValor = document.querySelector(
       "#montoTotalApuestas"
     );
-    apuestasRealizadasValor.innerText = montoTotalPagar;
+    apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
 
     apuestaNueva.appendChild(botonBorrarApuesta);
     listaApuestas.appendChild(apuestaNueva);
+
     botonBorrarApuesta.addEventListener("click", () => {
       montoTotalPagar -= valorFinalDeApuesta;
       apuestasRealizadasValor.innerText = montoTotalPagar;
@@ -285,7 +296,7 @@ futbolBetButton.addEventListener("click", () => {
     "$1500",
     "$3000",
     "Champions League Match 22:00  Apuestas desde $500 hasta $3000 ",
-    "Categoria : Futbol"
+    "Futbol"
   );
 });
 
@@ -295,7 +306,7 @@ pokerBetButton.addEventListener("click", () => {
     "$3500",
     "$5000",
     "Poker in Vegas 20:00 Apuestas desde $1500 to $5000",
-    "Categoria : Poker"
+    "Poker"
   );
 });
 
@@ -305,6 +316,6 @@ caballosBetButton.addEventListener("click", () => {
     "$1000",
     "$2000",
     "Horseback riding Leagues 19:00  Apuestas desde $300 hasta $2000",
-    "Categoria : Caballos"
+    "Caballos"
   );
 });
