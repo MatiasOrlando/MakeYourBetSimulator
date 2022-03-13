@@ -135,7 +135,7 @@
                         pasión en nuestra plataforma. </p>
                 </div>
                 <div class="btnAbajoDos">
-                    <button type="submit" class="btn btn-outline-dark mb-4" id="caballosBetButton">
+                    <button type="submit" class="btn btn-outline-dark mb-4" id="apuestasCaballos1">
                         Apuesta ahora
                     </button>
                 </div>
@@ -167,23 +167,40 @@
         </section>
 
         <div id="categoriaApuesta" style="display: none;">
-            <h2 id="tituloApuesta">
-            </h2>
-            <ul>
-                <li id="apuestaValor1"></li>
-                <li id="apuestaValor2"></li>
-                <li id="apuestaValor3"></li>
+            <h4 id="tituloApuesta">
+            </h4>
+            <ul class="valoresDeApuesta">
+                <li><button type="button" class="btn btn-primary" id="apuestaValor1"></button></li>
+                <li><button type="button" class="btn btn-primary" id="apuestaValor2"></button></li>
+                <li><button type="button" class="btn btn-primary" id="apuestaValor3"></button></li>
             </ul>
         </div>
 
 
         <div style="display: none;" id="apuestasRealizadas">
-            <h4>Apuestas Realizadas</h4>
-            <h5>Monto total de Apuestas: <span id="montoTotalApuestas"></span></h5>
+
+
+            <h4>Apuestas Realizadas<div id="montoTotalBet">Monto total de Apuestas: <span
+                        id="montoTotalApuestas"></span></div>
+            </h4>
+            <button type="button" class="btn btn-warning">Filtrar por categoría</button>
+            <input type="checkbox" value="g-01" onclick="test(this)">Futbol
+            <input type="checkbox" value="g-02" onclick="test(this)">Caballos
+            <input type="checkbox" value="g-03" onclick="test(this)">Poker
+
+            <br>
+            <p id="g-01" style="display:none">
+            </p>
+            <p id="g-02" style="display:none">
+            </p>
+            <p id="g-03" style="display:none">
+            </p>
 
             <ul id="listaApuestasRealizadas">
-
             </ul>
+
+
+
         </div>
         <div class="eventosPrincipales">
             Principales eventos de hoy:
@@ -197,11 +214,11 @@
                         <div class="col">
                             <div id="datos">
                                 <div class="foca">
-                                    <h2 class="fuenteName">
-                                        Fútbol</h2>
+                                    <h4 class="fuenteName">
+                                        Fútbol</h4>
                                 </div>
                                 <div class="mailing">
-                                    <h2 class="fuenteName">Final Champions League 22:00</h2>
+                                    <h4 class="fuenteName">Final Champions League 22:00</h4>
                                 </div>
                             </div>
                         </div>
@@ -225,11 +242,11 @@
                         <div class="col">
                             <div id="datos">
                                 <div class="foca">
-                                    <h2 class="fuenteName">
-                                        PokerStars</h2>
+                                    <h4 class="fuenteName">
+                                        PokerStars</h4>
                                 </div>
                                 <div class="mailing">
-                                    <h2 class="fuenteName">Liga Profesional en Las Vegas 20:00</h2>
+                                    <h4 class="fuenteName">Liga Profesional en Las Vegas 20:00</h4>
                                 </div>
                             </div>
                         </div>
@@ -256,11 +273,11 @@
                         <div class="col">
                             <div id="datos">
                                 <div class="foca">
-                                    <h2 class="fuenteName">
-                                        Carrera de Caballos</h2>
+                                    <h4 class="fuenteName">
+                                        Carrera de Caballos</h4>
                                 </div>
                                 <div class="mailing">
-                                    <h2 class="fuenteName">Liga San Francisco horseback riding 19:00</h2>
+                                    <h4 class="fuenteName">Liga San Francisco horseback riding 19:00</h4>
                                 </div>
                             </div>
                         </div>
@@ -376,9 +393,11 @@
             <!-- Copyright -->
         </footer>
 
-        <script src="./js/demo1.js">
+        <script src="./js/clasesyselectores.js">
         </script>
-        <script src="./js/domtest.js">
+        <script src="./js/funciones.js">
+        </script>
+        <script src="./js/orden.js">
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

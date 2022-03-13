@@ -244,3 +244,26 @@ h2 {
   margin-top: 120px;
   margin-left: 10px;
 }
+
+.valoresDeApuesta {
+  list-style-type: none;
+  line-height: 4;
+  padding: 50px;
+}
+
+#categoriaApuesta {
+  text-align: center;
+}
+
+#listaApuestasRealizadas {
+  line-height: 3;
+}
+
+#montoTotalBet {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.eventosPrincipales {
+  font-size: 30px;
+}
