@@ -183,10 +183,14 @@
             <h4>Apuestas Realizadas<div id="montoTotalBet">Monto total de Apuestas: <span
                         id="montoTotalApuestas"></span></div>
             </h4>
-            <button type="button" class="btn btn-warning">Filtrar por categoría</button>
-            <input type="checkbox" value="g-01" onclick="test(this)">Futbol
-            <input type="checkbox" value="g-02" onclick="test(this)">Caballos
-            <input type="checkbox" value="g-03" onclick="test(this)">Poker
+            <div class="filter">
+                <button type="button" class="btn btn-warning" id="filterButton">Filtrar por categoría</button>
+                <div class="checkBoxFil">
+                    <input type="checkbox" value="g-01" onclick="test(this)">Futbol
+                    <input type="checkbox" value="g-02" onclick="test(this)">Caballos
+                    <input type="checkbox" value="g-03" onclick="test(this)">Poker
+                </div>
+            </div>
 
             <br>
             <p id="g-01" style="display:none">

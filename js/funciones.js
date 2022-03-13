@@ -192,12 +192,38 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const futBet = filterFutbol();
     const pokBet = filterPoker();
 
-    // for (bet of futBet) {
-    //   futbolBetting.innerText = `Categoria: ${bet.categoria}, Monto: ${bet.valor}, Hora: ${bet.hora}`;
-    // }
+    let futFilter = futBet.map(function (bet) {
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+    });
 
-    caballosBetting.innerText = JSON.stringify(cabBet);
-    pokerBetting.innerText = JSON.stringify(pokBet);
+    let cabFilter = cabBet.map(function (bet) {
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+    });
+
+    let pokFilter = pokBet.map(function (bet) {
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+    });
+
+    futbolBetting.innerText = futFilter;
+    caballosBetting.innerText = cabFilter;
+    pokerBetting.innerText = pokFilter;
+
+    let filter = true;
+
+    function filtrarApuestas() {
+      if (filter) {
+        listaApuestas.remove();
+        filterButton.innerText = "Ver todas las apuestas";
+        filter = false;
+      } else {
+        filterButton.innerText = "Filtrar por Categoría";
+        divApuestasRealizadas.appendChild(listaApuestas);
+        filter = true;
+      }
+    }
+
+    const filterButton = document.querySelector("#filterButton");
+    filterButton.addEventListener("click", () => filtrarApuestas());
   }
   divApuesta.style.display = "block";
 }
