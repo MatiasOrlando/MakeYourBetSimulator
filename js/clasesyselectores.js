@@ -72,7 +72,7 @@ let hora;
 const buttonFutbol = document.querySelector("#buttonFutbol1");
 const caballosButton = document.querySelector("#buttonCaballos1");
 const pokerButton = document.querySelector("#buttonPoker1");
-const usuario = document.querySelector("#formUsuarioApostador");
+const formUsuario = document.querySelector("#formUsuarioApostador");
 const buttonForm = document.querySelector("#buttonForm1");
 const futbolBetButton = document.querySelector("#apuestasFutbol1");
 const pokerBetButton = document.querySelector("#apuestasPoker1");

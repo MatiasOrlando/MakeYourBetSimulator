@@ -42,6 +42,7 @@ function leerDatos() {
   ciudad = document.querySelector("#inputState1").value;
   pais = document.querySelector("#inputCountry1").value;
   hora = document.querySelector("#inputTime1").value;
+
   datosApostador = new Apostador(nombre, apellido, edad, mail, ciudad, pais);
   usuarioApostador.push(datosApostador);
 

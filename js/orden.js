@@ -1,6 +1,7 @@
 // Orden de Ejecución Eventos
 
-buttonForm.addEventListener("click", () => {
+formUsuario.addEventListener("submit", (e) => {
+  e.preventDefault();
   leerDatos();
   registroValido = validarRegistro();
   if (registroValido) {
