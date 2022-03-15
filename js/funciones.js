@@ -1,24 +1,24 @@
 // Modificaciones estáticas del HTML a traves del DOM
-const h1 = document.querySelector("#mainTitle");
-h1.innerText = "MAKE YOUR BET";
+// const h1 = document.querySelector("#mainTitle");
+// h1.innerText = "MAKE YOUR BET";
 
-h1.classList.add("h1");
+// h1.classList.add("h1");
 
-const mainImgDiv = document.createElement("div");
-mainImgDiv.classList.add("contenedorDos");
+// const mainImgDiv = document.createElement("div");
+// mainImgDiv.classList.add("contenedorDos");
 
-const mainImg = document.createElement("img");
-mainImg.classList.add("onlineGames");
+// const mainImg = document.createElement("img");
+// mainImg.classList.add("onlineGames");
 
-mainImg.src =
-  "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0fbb2e62997361.5f9eb4955a2b1.png";
+// mainImg.src =
+//   "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0fbb2e62997361.5f9eb4955a2b1.png";
 
-h1.insertAdjacentElement("afterend", mainImgDiv);
-mainImgDiv.appendChild(mainImg);
+// h1.insertAdjacentElement("afterend", mainImgDiv);
+// mainImgDiv.appendChild(mainImg);
 
-const mainText = document.querySelector(".textoInicial");
+// const mainText = document.querySelector(".textoInicial");
 
-mainText.style.fontSize = "18px";
+// mainText.style.fontSize = "18px";
 
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
@@ -458,3 +458,11 @@ function apuestasPokerEvento() {
     desplegarMenuPoker = true;
   }
 }
+
+function myDarkmode() {
+  let element = document.body;
+  element.classList.toggle("dark-mode");
+}
+
+const dark = document.querySelector("#darkMode");
+dark.addEventListener("click", myDarkmode);

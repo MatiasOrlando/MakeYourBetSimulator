@@ -287,3 +287,18 @@ h2 {
   display: flex;
   flex-direction: row;
 }
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+.darkModeButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -30px;
+}
+
+#darkMode {
+  line-height: 0.5;
+}
