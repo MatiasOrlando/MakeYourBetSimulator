@@ -40,7 +40,7 @@ class Reloj {
   estaAbierto = () => {
     return (
       (parseInt(this.hora) >= 8 && parseInt(this.hora) <= 12) ||
-      (parseInt(this.hora) >= 15 && parseInt(this.hora) <= 23)
+      (parseInt(this.hora) >= 13 && parseInt(this.hora) <= 24)
     );
   };
 }
@@ -58,6 +58,7 @@ let desplegarMenuFutbol = true;
 let desplegarMenuCaballos = true;
 let desplegarMenuPoker = true;
 let filter = true;
+let apuestasOnGameStorage = [];
 
 // Variables Globales Datos Personales
 let nombre;
@@ -77,3 +78,4 @@ const buttonForm = document.querySelector("#buttonForm1");
 const futbolBetButton = document.querySelector("#apuestasFutbol1");
 const pokerBetButton = document.querySelector("#apuestasPoker1");
 const caballosBetButton = document.querySelector("#apuestasCaballos1");
+const filterButton = document.querySelector("#filterButton");

@@ -273,8 +273,14 @@ h2 {
   flex-direction: column;
 }
 
-#filterButton {
+#filterButton,
+#deleteAll {
   width: 200px;
+}
+
+.buttonDeleteAll {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .checkboxFilter {

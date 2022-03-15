@@ -33,6 +33,15 @@ function obtenerLocal() {
   }
 }
 
+function obtenerLocalApuestas() {
+  apuestasOnGameStorage = JSON.parse(
+    localStorage.getItem("Informacion apuestas: ")
+  );
+  if (apuestasOnGameStorage === null) {
+    apuestasOnGameStorage = [];
+  }
+}
+
 // Funcion que recoge Datos del Usuario Registrado
 function leerDatos() {
   nombre = document.querySelector("#inputName1").value;
@@ -52,6 +61,7 @@ function leerDatos() {
 // Funcion Bienvenida
 function welcome() {
   obtenerLocal();
+  obtenerLocalApuestas();
 
   for (const datos of usuarioApostador) {
     listaApostadores.push(datos);
@@ -88,19 +98,46 @@ function welcome() {
 
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
 function validarRegistro() {
+  if (
+    nombre.trim() === "" ||
+    apellido.trim() === "" ||
+    mail.trim() === "" ||
+    ciudad.trim() === "" ||
+    pais.trim() === ""
+  ) {
+    const invalidData = document.createElement("h2");
+    invalidData.classList.add("tituloWelcomeInvalidAge");
+    invalidData.innerText = "Debe completar todos los campos";
+    tituloFormRegistro.remove();
+    formUsuarioApostador.remove();
+    formRegistro.appendChild(invalidData);
+    return false;
+  }
   const sosMayor = datosApostador.esMayor();
   if (sosMayor) {
+    const todayTime = new Date();
+    let realHours = todayTime.getHours();
     horario = new Reloj(hora);
+    let horarioIngresado = Number(hora);
     const horarioHabilitado = horario.estaAbierto();
     if (!horarioHabilitado) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
       invalidTime.innerText =
-        "Para apostar solo en horarios habilitados: 8-12 & 15-23";
+        "Para apostar solo en horarios habilitados: 8-12 & 14-23";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
 
+      return false;
+    }
+    if (horarioIngresado != realHours) {
+      const invalidTime = document.createElement("h2");
+      invalidTime.classList.add("tituloWelcomeInvalidAge");
+      invalidTime.innerText = "Debe ingresar el horario en punto actual";
+      tituloFormRegistro.remove();
+      formUsuarioApostador.remove();
+      formRegistro.appendChild(invalidTime);
       return false;
     }
     return true;
@@ -121,6 +158,50 @@ function validarRegistro() {
     formRegistro.appendChild(tituloUnderAge);
     return false;
   }
+}
+
+//  Funciones para calcular el precio final de apuestas
+const taxPrice = (x) => x * 0.21;
+const suma = (a, b) => Number(a) + Number(b);
+const restaDescuentoPromocional = (a, b) => a - b;
+
+//Funcion que calcula el precio final
+function calcularPrecioFinal(precio) {
+  const priceOfTax = taxPrice(parseInt(precio));
+  const priceWithTax = suma(precio, priceOfTax);
+  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
+  return priceFinalDiscount;
+}
+
+// Funcion que me permite devolver valores de acuerdo al filtro categorias checkbox seleccinado
+function test(o) {
+  var g = document.getElementById(o.value);
+  if (o.checked) {
+    g.style.display = "block";
+  } else {
+    g.style.display = "none";
+  }
+}
+
+//Funcion filtrar apuestas realizadas Categoria Futbol
+function filterFutbol() {
+  return datosApostador.apuestas.filter(
+    (apuesta) => apuesta.categoria == "Futbol"
+  );
+}
+
+//Funcion filtrar apuestas realizadas Categoria Caballos
+function filterCaballos() {
+  return datosApostador.apuestas.filter(
+    (apuesta) => apuesta.categoria == "Caballos"
+  );
+}
+
+//Funcion filtrar apuestas realizadas Categoria Poker
+function filterPoker() {
+  return datosApostador.apuestas.filter(
+    (apuesta) => apuesta.categoria == "Poker"
+  );
 }
 
 // Funcion que le permite al usuario realizar sus apuestas de acuerdo a las categorias elegidas
@@ -161,7 +242,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const apuestaNueva = document.createElement("li");
     const botonBorrarApuesta = document.createElement("button");
     botonBorrarApuesta.innerText = "Borrar";
-    botonBorrarApuesta.setAttribute("class", "btn btn-danger");
+    botonBorrarApuesta.setAttribute("class", "btn btn-warning");
 
     const valorFinalDeApuesta = calcularPrecioFinal(
       this.innerText.replace("$", "")
@@ -180,11 +261,22 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     apuestaNueva.appendChild(botonBorrarApuesta);
     listaApuestas.appendChild(apuestaNueva);
 
-    botonBorrarApuesta.addEventListener("click", () => {
+    // Funcion que permite borrar apuestas al usuario
+    function deleteBet() {
+      let apuestaElegidaBorrar = datosApostador.apuestas.find(
+        (x) => x.valor === valorFinalDeApuesta
+      );
+      if (apuestaElegidaBorrar) {
+        const index = datosApostador.apuestas.indexOf(apuestaElegidaBorrar);
+
+        datosApostador.apuestas.splice(index, 1);
+      }
       montoTotalPagar -= valorFinalDeApuesta;
       apuestasRealizadasValor.innerText = montoTotalPagar;
       apuestaNueva.remove();
-    });
+    }
+
+    botonBorrarApuesta.addEventListener("click", () => deleteBet());
 
     const futbolBetting = document.querySelector("#g-01");
     const caballosBetting = document.querySelector("#g-02");
@@ -209,8 +301,6 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     caballosBetting.innerText = cabFilter;
     pokerBetting.innerText = pokFilter;
 
-    let filter = true;
-
     function filtrarApuestas() {
       if (filter) {
         listaApuestas.remove();
@@ -225,21 +315,19 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
     const filterButton = document.querySelector("#filterButton");
     filterButton.addEventListener("click", () => filtrarApuestas());
+
+    // Funcion que me permite borrar todas las apuestas
+    function deleteAllBets() {
+      datosApostador.apuestas = [];
+      montoTotalPagar = 0;
+      apuestasRealizadasValor.innerText = montoTotalPagar;
+      apuestaNueva.remove();
+    }
+
+    const deleteAll = document.querySelector("#deleteAll");
+    deleteAll.addEventListener("click", () => deleteAllBets());
   }
   divApuesta.style.display = "block";
-}
-
-//  Funciones para calcular el precio final de apuestas
-const taxPrice = (x) => x * 0.21;
-const suma = (a, b) => Number(a) + Number(b);
-const restaDescuentoPromocional = (a, b) => a - b;
-
-//Funcion que calcula el precio final
-function calcularPrecioFinal(precio) {
-  const priceOfTax = taxPrice(parseInt(precio));
-  const priceWithTax = suma(precio, priceOfTax);
-  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
-  return priceFinalDiscount;
 }
 
 // Funcion estilo dropdown +info Evento futbol
@@ -369,35 +457,4 @@ function apuestasPokerEvento() {
     pokerButton.innerText = "Ver mas";
     desplegarMenuPoker = true;
   }
-}
-
-// Funcion que me permite devolver valores de acuerdo al filtro categorias checkbox seleccinado
-function test(o) {
-  var g = document.getElementById(o.value);
-  if (o.checked) {
-    g.style.display = "block";
-  } else {
-    g.style.display = "none";
-  }
-}
-
-//Funcion filtrar apuestas realizadas Categoria Futbol
-function filterFutbol() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Futbol"
-  );
-}
-
-//Funcion filtrar apuestas realizadas Categoria Caballos
-function filterCaballos() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Caballos"
-  );
-}
-
-//Funcion filtrar apuestas realizadas Categoria Poker
-function filterPoker() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Poker"
-  );
 }
