@@ -1,31 +1,9 @@
-// Modificaciones estáticas del HTML a traves del DOM
-// const h1 = document.querySelector("#mainTitle");
-// h1.innerText = "MAKE YOUR BET";
-
-// h1.classList.add("h1");
-
-// const mainImgDiv = document.createElement("div");
-// mainImgDiv.classList.add("contenedorDos");
-
-// const mainImg = document.createElement("img");
-// mainImg.classList.add("onlineGames");
-
-// mainImg.src =
-//   "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0fbb2e62997361.5f9eb4955a2b1.png";
-
-// h1.insertAdjacentElement("afterend", mainImgDiv);
-// mainImgDiv.appendChild(mainImg);
-
-// const mainText = document.querySelector(".textoInicial");
-
-// mainText.style.fontSize = "18px";
-
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
   localStorage.setItem(categoria, valor);
 };
 
-//Funcion que me permite obtener los datos de los apostadores registrados almacenados en LocalStorage
+// Funcion que me permite obtener los datos de los apostadores registrados almacenados en LocalStorage
 function obtenerLocal() {
   listaApostadores = JSON.parse(localStorage.getItem("Informacion cliente: "));
   if (listaApostadores === null) {
@@ -266,10 +244,26 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       let apuestaElegidaBorrar = datosApostador.apuestas.find(
         (x) => x.valor === valorFinalDeApuesta
       );
+
       if (apuestaElegidaBorrar) {
         const index = datosApostador.apuestas.indexOf(apuestaElegidaBorrar);
 
         datosApostador.apuestas.splice(index, 1);
+
+        let futFil = filterFutbol().map(function (bet) {
+          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+        });
+
+        let cabFil = filterCaballos().map(function (bet) {
+          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+        });
+        let pokFil = filterPoker().map(function (bet) {
+          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+        });
+
+        futbolBetting.innerText = futFil;
+        caballosBetting.innerText = cabFil;
+        pokerBetting.innerText = pokFil;
       }
       montoTotalPagar -= valorFinalDeApuesta;
       apuestasRealizadasValor.innerText = montoTotalPagar;
@@ -281,19 +275,16 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const futbolBetting = document.querySelector("#g-01");
     const caballosBetting = document.querySelector("#g-02");
     const pokerBetting = document.querySelector("#g-03");
-    const cabBet = filterCaballos();
-    const futBet = filterFutbol();
-    const pokBet = filterPoker();
 
-    let futFilter = futBet.map(function (bet) {
+    let futFilter = filterFutbol().map(function (bet) {
       return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
     });
 
-    let cabFilter = cabBet.map(function (bet) {
+    let cabFilter = filterCaballos().map(function (bet) {
       return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
     });
 
-    let pokFilter = pokBet.map(function (bet) {
+    let pokFilter = filterPoker().map(function (bet) {
       return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
     });
 
