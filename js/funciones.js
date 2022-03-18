@@ -11,14 +11,14 @@ function obtenerLocal() {
   }
 }
 
-function obtenerLocalApuestas() {
-  apuestasOnGameStorage = JSON.parse(
-    localStorage.getItem("Informacion apuestas: ")
-  );
-  if (apuestasOnGameStorage === null) {
-    apuestasOnGameStorage = [];
-  }
-}
+// function obtenerLocalApuestas() {
+//   apuestasOnGameStorage = JSON.parse(
+//     localStorage.getItem("Informacion apuestas: ")
+//   );
+//   if (apuestasOnGameStorage === null) {
+//     apuestasOnGameStorage = [];
+//   }
+// }
 
 // Funcion que recoge Datos del Usuario Registrado
 function leerDatos() {
@@ -39,7 +39,7 @@ function leerDatos() {
 // Funcion Bienvenida
 function welcome() {
   obtenerLocal();
-  obtenerLocalApuestas();
+  // obtenerLocalApuestas();
 
   for (const datos of usuarioApostador) {
     listaApostadores.push(datos);
@@ -333,7 +333,10 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
               icon: "success",
             });
           } else {
-            swal("Apuestas canceladas");
+            swal("Apuestas canceladas, vuelva pronto");
+            datosApostador.apuestas = [];
+            montoTotalPagar = 0;
+            apuestasRealizadasValor.innerText = montoTotalPagar;
           }
         });
       } else {
