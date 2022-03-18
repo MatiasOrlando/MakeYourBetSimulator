@@ -57,7 +57,6 @@ let montoTotalPagar = 0;
 let desplegarMenuFutbol = true;
 let desplegarMenuCaballos = true;
 let desplegarMenuPoker = true;
-let filter = true;
 let apuestasOnGameStorage = [];
 
 // Variables Globales Datos Personales

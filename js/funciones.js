@@ -185,7 +185,7 @@ function filterPoker() {
 // Funcion que le permite al usuario realizar sus apuestas de acuerdo a las categorias elegidas
 function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
   if (!registroValido) {
-    alert("Debe estar registrado para continuar");
+    swal("Debe estar registrado para continuar");
     return false;
   }
   const divApuesta = document.querySelector("#categoriaApuesta");
@@ -220,7 +220,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const apuestaNueva = document.createElement("li");
     const botonBorrarApuesta = document.createElement("button");
     botonBorrarApuesta.innerText = "Borrar";
-    botonBorrarApuesta.setAttribute("class", "btn btn-warning");
+    botonBorrarApuesta.setAttribute("class", "btn btn-danger");
 
     const valorFinalDeApuesta = calcularPrecioFinal(
       this.innerText.replace("$", "")
@@ -251,14 +251,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         datosApostador.apuestas.splice(index, 1);
 
         let futFil = filterFutbol().map(function (bet) {
-          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
 
         let cabFil = filterCaballos().map(function (bet) {
-          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
         let pokFil = filterPoker().map(function (bet) {
-          return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
 
         futbolBetting.innerText = futFil;
@@ -277,21 +277,22 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const pokerBetting = document.querySelector("#g-03");
 
     let futFilter = filterFutbol().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     let cabFilter = filterCaballos().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     let pokFilter = filterPoker().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}`;
+      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     futbolBetting.innerText = futFilter;
     caballosBetting.innerText = cabFilter;
     pokerBetting.innerText = pokFilter;
 
+    let filter = true;
     function filtrarApuestas() {
       if (filter) {
         listaApuestas.remove();
@@ -317,6 +318,30 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
     const deleteAll = document.querySelector("#deleteAll");
     deleteAll.addEventListener("click", () => deleteAllBets());
+
+    function confirmAllBets() {
+      if (datosApostador.apuestas.length >= 1) {
+        swal({
+          title: "Estas seguro?",
+          text: "Una vez confirmadas tus apuestas no podras regresar",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willConfirm) => {
+          if (willConfirm) {
+            swal("Felicitaciones, tus apuestas han sido confirmadas", {
+              icon: "success",
+            });
+          } else {
+            swal("Apuestas canceladas");
+          }
+        });
+      } else {
+        return false;
+      }
+    }
+    const confirmBet = document.querySelector("#confirmBet");
+    confirmBet.addEventListener("click", () => confirmAllBets());
   }
   divApuesta.style.display = "block";
 }
@@ -327,32 +352,18 @@ function apuestasFutbolEvento() {
     const futbolEvent = document.querySelector(".perfilCentrado1");
     const futbolBet = document.createElement("div");
     futbolBet.setAttribute("id", "soccerBet");
-    const futbolBetTitle = document.createElement("h3");
     const futbolBetParagraph = document.createElement("p");
-    const futbolBetList = document.createElement("ul");
-    const futbolBetOptions1 = document.createElement("li");
-    const futbolBetOptions2 = document.createElement("li");
-    const futbolBetOptions3 = document.createElement("li");
+    futbolBetParagraph.setAttribute("class", "soccerBetPrediction");
+    const futImg = document.createElement("img");
+    futImg.src = "img/futbol.jpg";
 
     futbolBet.classList.add("divsJuegos");
-    futbolBetTitle.classList.add("h3Juegos");
-    futbolBetTitle.innerHTML = "xxx";
-    futbolBetParagraph.innerHTML = "xxx";
-    futbolBetOptions1.innerHTML = "xxx";
-    futbolBetOptions2.innerHTML = "xxx";
-    futbolBetOptions3.innerHTML = "xxx";
+    futbolBetParagraph.innerHTML =
+      "Los fanáticos del fútbol español encontrarán un juego increíblemente interesante. Los rivales están en movimiento ahora y podría ser un El Clásico realmente emocionante. Es poco probable prescindir de los goles aquí, los equipos tienen como objetivo ganar. Desde el punto de vista de la tabla azulgrana es aún más necesario, pero el Real Madrid no va a dejar ir la copa y mucho menos con un rival como el Barcelona.";
 
-    futbolBetList.appendChild(
-      futbolBetOptions1,
-      futbolBetOptions2,
-      futbolBetOptions3
-    );
-
-    futbolBet.appendChild(futbolBetTitle);
-    futbolBetTitle.appendChild(futbolBetParagraph);
-    futbolBetParagraph.appendChild(futbolBetOptions1);
-    futbolBetParagraph.appendChild(futbolBetOptions2);
-    futbolBetParagraph.appendChild(futbolBetOptions3);
+    futbolBet.appendChild(futbolBetParagraph);
+    futbolBet.appendChild(futImg);
+    futImg.style.borderRadius = "20px";
     futbolEvent.insertAdjacentElement("afterend", futbolBet);
     buttonFutbol.innerText = "Ver menos";
     desplegarMenuFutbol = false;
@@ -370,32 +381,17 @@ function apuestasCaballosEvento() {
     const caballosEvent = document.querySelector(".perfilCentrado3");
     const caballosBet = document.createElement("div");
     caballosBet.setAttribute("id", "caballosBet");
-    const caballosBetTitle = document.createElement("h3");
     const caballosBetParagraph = document.createElement("p");
-    const caballosBetList = document.createElement("ul");
-    const caballosBetOptions1 = document.createElement("li");
-    const caballosBetOptions2 = document.createElement("li");
-    const caballosBetOptions3 = document.createElement("li");
-
-    caballosBetTitle.innerHTML = "xxxx";
-    caballosBetParagraph.innerHTML = "xxx";
-    caballosBetOptions1.innerHTML = "xxx";
-    caballosBetOptions2.innerHTML = "xxx";
-    caballosBetOptions3.innerHTML = "xxx";
-
-    caballosBetList.appendChild(
-      caballosBetOptions1,
-      caballosBetOptions2,
-      caballosBetOptions3
-    );
+    caballosBetParagraph.setAttribute("class", "caballosBetPrediction");
+    const cabImg = document.createElement("img");
+    cabImg.src = "img/caballos.jpg";
+    cabImg.style.borderRadius = "20px";
+    caballosBetParagraph.innerHTML =
+      "Segundo día de competición en la pista de hierba del Hipódromo de San Francisco. Pista blanda (3,8). Seis carreras interesantes comienzan con la disputa del premio AKELARRE sobre 1.400 metros. Se presenta la ganadora en Francia de 3 carreras, hablamos de SAMEDI RIEN, comprada por la Yeguada Rocío con vistas a las pruebas importantes sobre la velocidad. Junto a ella un ramillete de buenos caballos como BRIBON, ganador de 3 carreras a 2 años, INCREDIT, ganadora del Carlos Sobrino y BLACK VOICE, ganadora en Madrid y corredora en GIII.";
 
     caballosBet.classList.add("divsJuegos");
-    caballosBetTitle.classList.add("h3Juegos");
-    caballosBet.appendChild(caballosBetTitle);
-    caballosBetTitle.appendChild(caballosBetParagraph);
-    caballosBetParagraph.appendChild(caballosBetOptions1);
-    caballosBetParagraph.appendChild(caballosBetOptions2);
-    caballosBetParagraph.appendChild(caballosBetOptions3);
+    caballosBet.appendChild(caballosBetParagraph);
+    caballosBet.appendChild(cabImg);
     caballosEvent.insertAdjacentElement("afterend", caballosBet);
     caballosButton.innerText = "Ver menos";
     desplegarMenuCaballos = false;
@@ -414,31 +410,19 @@ function apuestasPokerEvento() {
     const pokerEvent = document.querySelector(".perfilCentrado2");
     const pokerBet = document.createElement("div");
     pokerBet.setAttribute("id", "pokerBet");
-    const pokerBetTitle = document.createElement("h3");
     const pokerBetParagraph = document.createElement("p");
-    const pokerBetList = document.createElement("ul");
-    const pokerBetOptions1 = document.createElement("li");
-    const pokerBetOptions2 = document.createElement("li");
-    const pokerBetOptions3 = document.createElement("li");
+    pokerBetParagraph.setAttribute("class", "pokerBetPrediction");
+    const pokImg = document.createElement("img");
+    pokImg.src = "img/poker.jpg";
+    pokImg.style.borderRadius = "20px";
+
     pokerBet.classList.add("divsJuegos");
-    pokerBetTitle.classList.add("h3Juegos");
-    pokerBetTitle.innerHTML = "xxx";
-    pokerBetParagraph.innerHTML = "xxx";
-    pokerBetOptions1.innerHTML = "xxx";
-    pokerBetOptions2.innerHTML = "xxx";
-    pokerBetOptions3.innerHTML = "xxx";
 
-    pokerBetList.appendChild(
-      pokerBetOptions1,
-      pokerBetOptions2,
-      pokerBetOptions3
-    );
+    pokerBetParagraph.innerHTML =
+      "Fijando este buy in, todo apunta a que el Super High Roller Bowl será el torneo de mayor entrada del año, como sucedió un año atrás, y superará así el Super High Roller Manila, el cual tiene un costo de $250.000 para cada uno de sus participantes. De esta manera queda conformada una bolsa de premios que asciende a 15 millones de dólares (se añaden $300.000 de los sponsors). Habra figuras de talla mundial, como lo son: Antonio Esfandiari, Phil Hellmuth, Erik Seidel y Daniel Negreanu.";
 
-    pokerBet.appendChild(pokerBetTitle);
-    pokerBetTitle.appendChild(pokerBetParagraph);
-    pokerBetParagraph.appendChild(pokerBetOptions1);
-    pokerBetParagraph.appendChild(pokerBetOptions2);
-    pokerBetParagraph.appendChild(pokerBetOptions3);
+    pokerBet.appendChild(pokerBetParagraph);
+    pokerBet.appendChild(pokImg);
     pokerEvent.insertAdjacentElement("afterend", pokerBet);
     pokerButton.innerText = "Ver menos";
     desplegarMenuPoker = false;
@@ -450,6 +434,7 @@ function apuestasPokerEvento() {
   }
 }
 
+// Funcion Dark mode
 function myDarkmode() {
   let element = document.body;
   element.classList.toggle("dark-mode");

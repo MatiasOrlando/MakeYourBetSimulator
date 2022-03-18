@@ -39,7 +39,7 @@ h1 {
   padding: 10px;
   margin-bottom: 60px;
   justify-content: space-evenly;
-  margin-top: 80px;
+  margin-top: 150px;
 }
 .probando .topo {
   display: flex;
@@ -161,6 +161,8 @@ h4 a:hover {
 .perfilCentrado1 .perfilDesign,
 .perfilCentrado2 .perfilDesign,
 .perfilCentrado3 .perfilDesign {
+  display: flex;
+  justify-content: center;
   padding: 35px;
   background-color: rgb(195, 200, 204);
   width: 80%;
@@ -180,6 +182,7 @@ h4 a:hover {
   padding-left: 85px;
   font-family: "Roboto";
   text-decoration: underline;
+  margin-top: 50px;
 }
 
 footer {
@@ -195,10 +198,6 @@ h2 {
   justify-content: center;
   margin-bottom: 50px;
   margin-top: 50px;
-}
-
-.h3Juegos {
-  font-size: 22px;
 }
 
 .presentation {
@@ -273,8 +272,7 @@ h2 {
   flex-direction: column;
 }
 
-#filterButton,
-#deleteAll {
+#filterButton {
   width: 200px;
 }
 
@@ -301,4 +299,26 @@ h2 {
 
 #darkMode {
   line-height: 0.5;
+}
+
+#soccerBet,
+#caballosBet,
+#pokerBet {
+  display: flex;
+  justify-content: center;
+  width: 75%;
+  margin-left: 200px;
+}
+
+.soccerBetPrediction,
+.caballosBetPrediction,
+.pokerBetPrediction {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-family: "Roboto";
+}
+
+#confirmBet {
+  margin-bottom: 20px;
 }
