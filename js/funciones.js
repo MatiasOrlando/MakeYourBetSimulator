@@ -14,9 +14,7 @@ function obtenerLocalApuestas() {
   let apuestasOnGameStorage = JSON.parse(
     localStorage.getItem("Informacion apuestas: ")
   );
-  if (apuestasOnGameStorage === null) {
-    apuestasOnGameStorage = [];
-  }
+  apuestasOnGameStorage === null && (apuestasOnGameStorage = []);
 }
 
 // Funcion que recoge Datos del Usuario Registrado
@@ -101,8 +99,8 @@ function validarRegistro() {
   }
   const sosMayor = datosApostador.esMayor();
   if (sosMayor) {
-    const todayTime = new Date();
-    let realHours = todayTime.getHours();
+    let DateTime = luxon.DateTime;
+    let localHour = DateTime.local().hour;
     horario = new Reloj(hora);
     let horarioIngresado = Number(hora);
     const horarioHabilitado = horario.estaAbierto();
@@ -117,7 +115,7 @@ function validarRegistro() {
 
       return false;
     }
-    if (horarioIngresado != realHours) {
+    if (horarioIngresado != localHour) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
       invalidTime.innerText = "Debe ingresar el horario en punto actual";
@@ -219,6 +217,17 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
   valorApuesta3.addEventListener("click", clickvalor);
   function clickvalor() {
+    Toastify({
+      text: "Apuesta agregada",
+      duration: 1500,
+      newWindow: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "black",
+      },
+    }).showToast();
     const divApuestasRealizadas = document.querySelector("#apuestasRealizadas");
     divApuestasRealizadas.style.display = "block";
     const listaApuestas = document.querySelector("#listaApuestasRealizadas");
@@ -298,6 +307,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     pokerBetting.innerText = pokFilter;
 
     let filter = true;
+
     function filtrarApuestas() {
       if (filter) {
         listaApuestas.remove();
@@ -319,6 +329,21 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       montoTotalPagar = 0;
       apuestasRealizadasValor.innerText = montoTotalPagar;
       apuestaNueva.remove();
+      swal("Todas las apuestas han sido borradas");
+      let futFil2 = filterFutbol().map(function (bet) {
+        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      });
+
+      let cabFil2 = filterCaballos().map(function (bet) {
+        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      });
+      let pokFil2 = filterPoker().map(function (bet) {
+        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      });
+
+      futbolBetting.innerText = futFil2;
+      caballosBetting.innerText = cabFil2;
+      pokerBetting.innerText = pokFil2;
     }
 
     const deleteAll = document.querySelector("#deleteAll");
@@ -345,7 +370,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
               icon: "success",
             });
           } else {
-            swal("Apuestas canceladas, vuelva pronto");
+            swal("Apuestas canceladas, vuelva pronto", { icon: "error" });
             datosApostador.apuestas = [];
             montoTotalPagar = 0;
             apuestasRealizadasValor.innerText = montoTotalPagar;
