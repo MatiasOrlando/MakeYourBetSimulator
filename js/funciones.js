@@ -38,8 +38,6 @@ function leerDatos() {
   );
 
   usuarioApostador.push(datosApostador);
-
-  console.log(usuarioApostador);
 }
 
 // Funcion Bienvenida
@@ -475,10 +473,10 @@ function apuestasPokerEvento() {
 }
 
 // Funcion Dark mode
-function myDarkmode() {
+function myDarkMode() {
   let element = document.body;
   element.classList.toggle("dark-mode");
 }
 
 const dark = document.querySelector("#darkMode");
-dark.addEventListener("click", myDarkmode);
+dark.addEventListener("click", myDarkMode);
