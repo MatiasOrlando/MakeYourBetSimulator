@@ -322,3 +322,13 @@ h2 {
 #confirmBet {
   margin-bottom: 20px;
 }
+
+#montoTotalBet {
+  display: flex;
+  flex-direction: column;
+}
+
+#testDiv {
+  display: flex;
+  justify-content: flex-end;
+}

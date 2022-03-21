@@ -6,19 +6,18 @@ const guardarLocal = (categoria, valor) => {
 // Funcion que me permite obtener los datos de los apostadores registrados almacenados en LocalStorage
 function obtenerLocal() {
   listaApostadores = JSON.parse(localStorage.getItem("Informacion cliente: "));
-  if (listaApostadores === null) {
-    listaApostadores = [];
-  }
+
+  listaApostadores === null && (listaApostadores = []);
 }
 
-// function obtenerLocalApuestas() {
-//   apuestasOnGameStorage = JSON.parse(
-//     localStorage.getItem("Informacion apuestas: ")
-//   );
-//   if (apuestasOnGameStorage === null) {
-//     apuestasOnGameStorage = [];
-//   }
-// }
+function obtenerLocalApuestas() {
+  let apuestasOnGameStorage = JSON.parse(
+    localStorage.getItem("Informacion apuestas: ")
+  );
+  if (apuestasOnGameStorage === null) {
+    apuestasOnGameStorage = [];
+  }
+}
 
 // Funcion que recoge Datos del Usuario Registrado
 function leerDatos() {
@@ -30,7 +29,16 @@ function leerDatos() {
   pais = document.querySelector("#inputCountry1").value;
   hora = document.querySelector("#inputTime1").value;
 
-  datosApostador = new Apostador(nombre, apellido, edad, mail, ciudad, pais);
+  datosApostador = new Apostador(
+    nombre,
+    apellido,
+    edad,
+    mail,
+    ciudad,
+    pais,
+    hora
+  );
+
   usuarioApostador.push(datosApostador);
 
   console.log(usuarioApostador);
@@ -39,7 +47,7 @@ function leerDatos() {
 // Funcion Bienvenida
 function welcome() {
   obtenerLocal();
-  // obtenerLocalApuestas();
+  obtenerLocalApuestas();
 
   for (const datos of usuarioApostador) {
     listaApostadores.push(datos);
@@ -154,11 +162,7 @@ function calcularPrecioFinal(precio) {
 // Funcion que me permite devolver valores de acuerdo al filtro categorias checkbox seleccinado
 function test(o) {
   var g = document.getElementById(o.value);
-  if (o.checked) {
-    g.style.display = "block";
-  } else {
-    g.style.display = "none";
-  }
+  o.checked ? (g.style.display = "block") : (g.style.display = "none");
 }
 
 //Funcion filtrar apuestas realizadas Categoria Futbol
@@ -188,6 +192,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     swal("Debe estar registrado para continuar");
     return false;
   }
+
   const divApuesta = document.querySelector("#categoriaApuesta");
   let valorApuesta1 = document.querySelector("#apuestaValor1");
   let valorApuesta2 = document.querySelector("#apuestaValor2");
@@ -329,6 +334,13 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
           dangerMode: true,
         }).then((willConfirm) => {
           if (willConfirm) {
+            for (const apuesta of datosApostador.apuestas) {
+              apuestasOnGameStorage.push(apuesta);
+            }
+            guardarLocal(
+              "Informacion Apuestas Confirmadas: ",
+              JSON.stringify(apuestasOnGameStorage)
+            );
             swal("Felicitaciones, tus apuestas han sido confirmadas", {
               icon: "success",
             });
