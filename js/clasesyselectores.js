@@ -58,6 +58,7 @@ let desplegarMenuFutbol = true;
 let desplegarMenuCaballos = true;
 let desplegarMenuPoker = true;
 let apuestasOnGameStorage = [];
+let onlineBet = [];
 
 // Variables Globales Datos Personales
 let nombre;

@@ -11,10 +11,9 @@ function obtenerLocal() {
 }
 
 function obtenerLocalApuestas() {
-  let apuestasOnGameStorage = JSON.parse(
-    localStorage.getItem("Informacion apuestas: ")
-  );
-  apuestasOnGameStorage === null && (apuestasOnGameStorage = []);
+  apuestasOnGameStorage =
+    JSON.parse(localStorage.getItem("Informacion Apuestas Confirmadas: ")) ||
+    [];
 }
 
 // Funcion que recoge Datos del Usuario Registrado
@@ -44,7 +43,6 @@ function leerDatos() {
 function welcome() {
   obtenerLocal();
   obtenerLocalApuestas();
-
   for (const datos of usuarioApostador) {
     listaApostadores.push(datos);
   }
@@ -357,7 +355,9 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
           dangerMode: true,
         }).then((willConfirm) => {
           if (willConfirm) {
-            for (const apuesta of datosApostador.apuestas) {
+            onlineBet.push(datosApostador.apuestas);
+            console.log(onlineBet);
+            for (const apuesta of onlineBet) {
               apuestasOnGameStorage.push(apuesta);
             }
             guardarLocal(
