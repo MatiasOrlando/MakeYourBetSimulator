@@ -372,6 +372,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
             datosApostador.apuestas = [];
             montoTotalPagar = 0;
             apuestasRealizadasValor.innerText = montoTotalPagar;
+            listaApuestas.innerText = "";
           }
         });
       } else {
