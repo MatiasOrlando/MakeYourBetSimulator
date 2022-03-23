@@ -426,7 +426,7 @@ h2 {
 }
 
 .main_div button {
-  padding: 0.7em 1.5em;
+  padding: 0.4em 1.5em;
   font-size: 16px;
   background: #222222;
   color: #fff;
@@ -441,5 +441,5 @@ h2 {
 }
 
 #inputTime1 {
-  width: 90px;
+  width: 100px;
 }

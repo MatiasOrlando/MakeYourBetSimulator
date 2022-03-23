@@ -97,9 +97,9 @@ function validarRegistro() {
   const sosMayor = datosApostador.esMayor();
   if (sosMayor) {
     let DateTime = luxon.DateTime;
-    let localHour = DateTime.local().hour;
+    let localTime = DateTime.local();
+    let localHour = localTime.toLocaleString(DateTime.TIME_24_SIMPLE);
     let horario = new Reloj(hora);
-    let horarioIngresado = Number(hora);
     const horarioHabilitado = horario.estaAbierto();
     if (!horarioHabilitado) {
       const invalidTime = document.createElement("h2");
@@ -111,10 +111,10 @@ function validarRegistro() {
 
       return false;
     }
-    if (horarioIngresado != localHour) {
+    if (hora != localHour) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText = "Debe ingresar el horario en punto actual";
+      invalidTime.innerText = "Debe ingresar el horario actual de la Argentina";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
