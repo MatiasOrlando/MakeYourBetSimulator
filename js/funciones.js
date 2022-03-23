@@ -78,6 +78,7 @@ function welcome() {
 
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
 function validarRegistro() {
+  const { edad } = datosApostador;
   if (
     nombre.trim() === "" ||
     apellido.trim() === "" ||
@@ -97,14 +98,13 @@ function validarRegistro() {
   if (sosMayor) {
     let DateTime = luxon.DateTime;
     let localHour = DateTime.local().hour;
-    horario = new Reloj(hora);
+    let horario = new Reloj(hora);
     let horarioIngresado = Number(hora);
     const horarioHabilitado = horario.estaAbierto();
     if (!horarioHabilitado) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText =
-        "Para apostar solo en horarios habilitados: 8-12 & 14-23";
+      invalidTime.innerText = "Para apostar solo en horarios habilitados: 8-24";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
@@ -121,7 +121,7 @@ function validarRegistro() {
       return false;
     }
     return true;
-  } else if (isNaN(datosApostador.edad)) {
+  } else if (isNaN(edad)) {
     const tituloInvalidAge = document.createElement("h2");
     tituloInvalidAge.classList.add("tituloWelcomeInvalidAge");
     tituloInvalidAge.innerText = "INGRESE UNA EDAD VÁLIDA PARA APOSTAR";
@@ -157,27 +157,6 @@ function calcularPrecioFinal(precio) {
 function test(o) {
   var g = document.getElementById(o.value);
   o.checked ? (g.style.display = "block") : (g.style.display = "none");
-}
-
-//Funcion filtrar apuestas realizadas Categoria Futbol
-function filterFutbol() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Futbol"
-  );
-}
-
-//Funcion filtrar apuestas realizadas Categoria Caballos
-function filterCaballos() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Caballos"
-  );
-}
-
-//Funcion filtrar apuestas realizadas Categoria Poker
-function filterPoker() {
-  return datosApostador.apuestas.filter(
-    (apuesta) => apuesta.categoria == "Poker"
-  );
 }
 
 // Funcion que le permite al usuario realizar sus apuestas de acuerdo a las categorias elegidas
@@ -224,6 +203,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         background: "black",
       },
     }).showToast();
+    const { apuestas } = datosApostador;
     const divApuestasRealizadas = document.querySelector("#apuestasRealizadas");
     divApuestasRealizadas.style.display = "block";
     const listaApuestas = document.querySelector("#listaApuestasRealizadas");
@@ -238,9 +218,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     montoTotalPagar += valorFinalDeApuesta;
     apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es $${valorFinalDeApuesta}`;
 
-    datosApostador.apuestas.push(
-      new Apuesta(valorFinalDeApuesta, categoria, hora)
-    );
+    apuestas.push(new Apuesta(valorFinalDeApuesta, categoria, hora));
     const apuestasRealizadasValor = document.querySelector(
       "#montoTotalApuestas"
     );
@@ -251,14 +229,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
     // Funcion que permite borrar apuestas al usuario
     function deleteBet() {
-      let apuestaElegidaBorrar = datosApostador.apuestas.find(
-        (x) => x.valor === valorFinalDeApuesta
+      let apuestaElegidaBorrar = apuestas.find(
+        (apuesta) => apuesta.valor === valorFinalDeApuesta
       );
 
       if (apuestaElegidaBorrar) {
-        const index = datosApostador.apuestas.indexOf(apuestaElegidaBorrar);
+        const index = apuestas.indexOf(apuestaElegidaBorrar);
 
-        datosApostador.apuestas.splice(index, 1);
+        apuestas.splice(index, 1);
 
         let futFil = filterFutbol().map(function (bet) {
           return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
@@ -276,7 +254,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         pokerBetting.innerText = pokFil;
       }
       montoTotalPagar -= valorFinalDeApuesta;
-      apuestasRealizadasValor.innerText = montoTotalPagar;
+      apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
       apuestaNueva.remove();
     }
 
@@ -302,6 +280,23 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     caballosBetting.innerText = cabFilter;
     pokerBetting.innerText = pokFilter;
 
+    //Funcion filtrar apuestas realizadas Categoria Futbol
+    function filterFutbol() {
+      return apuestas.filter((apuesta) => apuesta.categoria == "Futbol");
+    }
+
+    //Funcion filtrar apuestas realizadas Categoria Caballos
+    function filterCaballos() {
+      return apuestas.filter((apuesta) => apuesta.categoria == "Caballos");
+    }
+
+    //Funcion filtrar apuestas realizadas Categoria Poker
+    function filterPoker() {
+      return apuestas.filter((apuesta) => apuesta.categoria == "Poker");
+    }
+    const filterButton = document.querySelector("#filterButton");
+    filterButton.addEventListener("click", () => filtrarApuestas());
+
     let filter = true;
 
     function filtrarApuestas() {
@@ -315,9 +310,6 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         filter = true;
       }
     }
-
-    const filterButton = document.querySelector("#filterButton");
-    filterButton.addEventListener("click", () => filtrarApuestas());
 
     // Funcion que me permite borrar todas las apuestas
     function deleteAllBets() {
@@ -345,8 +337,9 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const deleteAll = document.querySelector("#deleteAll");
     deleteAll.addEventListener("click", () => deleteAllBets());
 
+    // Funcion confirmar apuestas realizadas
     function confirmAllBets() {
-      if (datosApostador.apuestas.length >= 1) {
+      if (apuestas.length >= 1) {
         swal({
           title: "Estas seguro?",
           text: "Una vez confirmadas tus apuestas no podras regresar",
@@ -355,8 +348,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
           dangerMode: true,
         }).then((willConfirm) => {
           if (willConfirm) {
-            onlineBet.push(datosApostador.apuestas);
-            console.log(onlineBet);
+            onlineBet.push(apuestas);
             for (const apuesta of onlineBet) {
               apuestasOnGameStorage.push(apuesta);
             }

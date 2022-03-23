@@ -39,7 +39,7 @@ class Reloj {
   };
   estaAbierto = () => {
     return (
-      (parseInt(this.hora) >= 9 && parseInt(this.hora) <= 12) ||
+      (parseInt(this.hora) >= 8 && parseInt(this.hora) <= 12) ||
       (parseInt(this.hora) >= 13 && parseInt(this.hora) <= 24)
     );
   };
@@ -48,7 +48,6 @@ class Reloj {
 // Variables  Globales
 let datosApostador;
 const priceDiscount = 50;
-let horario;
 let priceFinalDiscount;
 const usuarioApostador = [];
 let listaApostadores = [];
