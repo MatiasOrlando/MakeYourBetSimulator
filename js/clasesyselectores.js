@@ -38,10 +38,7 @@ class Reloj {
     alert("Usted ha elegido el siguiente horario: " + this.hora);
   };
   estaAbierto = () => {
-    return (
-      (parseInt(this.hora) >= 8 && parseInt(this.hora) <= 12) ||
-      (parseInt(this.hora) >= 13 && parseInt(this.hora) <= 24)
-    );
+    return parseInt(this.hora) >= 8 && parseInt(this.hora) <= 24;
   };
 }
 
