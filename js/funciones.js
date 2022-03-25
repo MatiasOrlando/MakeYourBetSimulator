@@ -285,14 +285,31 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       return apuestas.filter((apuesta) => apuesta.categoria == "Futbol");
     }
 
+    function filterFutbol2() {
+      return datosApostador.apuestas.filter(
+        (apuesta) => apuesta.categoria == "Futbol"
+      );
+    }
     //Funcion filtrar apuestas realizadas Categoria Caballos
     function filterCaballos() {
       return apuestas.filter((apuesta) => apuesta.categoria == "Caballos");
     }
 
+    function filterCaballos2() {
+      return datosApostador.apuestas.filter(
+        (apuesta) => apuesta.categoria == "Caballos"
+      );
+    }
+
     //Funcion filtrar apuestas realizadas Categoria Poker
     function filterPoker() {
       return apuestas.filter((apuesta) => apuesta.categoria == "Poker");
+    }
+
+    function filterPoker2() {
+      return datosApostador.apuestas.filter(
+        (apuesta) => apuesta.categoria == "Poker"
+      );
     }
     const filterButton = document.querySelector("#filterButton");
     filterButton.addEventListener("click", () => filtrarApuestas());
@@ -306,7 +323,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         filter = false;
       } else {
         filterButton.innerText = "Filtrar por Categoría";
-        divApuestasRealizadas.appendChild(listaApuestas);
+        divConfirmAllbets.insertAdjacentElement("beforebegin", listaApuestas);
         filter = true;
       }
     }
@@ -318,14 +335,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       apuestasRealizadasValor.innerText = montoTotalPagar;
       apuestaNueva.remove();
       swal("Todas las apuestas han sido borradas");
-      let futFil2 = filterFutbol().map(function (bet) {
+      let futFil2 = filterFutbol2().map(function (bet) {
         return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
 
-      let cabFil2 = filterCaballos().map(function (bet) {
+      let cabFil2 = filterCaballos2().map(function (bet) {
         return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
-      let pokFil2 = filterPoker().map(function (bet) {
+      let pokFil2 = filterPoker2().map(function (bet) {
         return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
 
@@ -371,6 +388,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         return false;
       }
     }
+    const divConfirmAllbets = document.querySelector(".buttonConfirmAllBets");
     const confirmBet = document.querySelector("#confirmBet");
     confirmBet.addEventListener("click", () => confirmAllBets());
   }
@@ -473,3 +491,18 @@ function myDarkMode() {
 
 const dark = document.querySelector("#darkMode");
 dark.addEventListener("click", myDarkMode);
+
+// Funcion Bono Bienvenida
+
+function bonoBienvenida() {
+  setTimeout(() => {
+    const bono = document.createElement("div");
+    bono.setAttribute("class", "bonoBienvenida");
+    const bonoTexto = document.createElement("span");
+    bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
+    bonoTexto.innerText = `Disfruta tu bono de bienvenida: $150`;
+    bono.appendChild(bonoTexto);
+    const formInicial = document.querySelector(".formText");
+    formInicial.insertAdjacentElement("afterend", bono);
+  }, 1800);
+}

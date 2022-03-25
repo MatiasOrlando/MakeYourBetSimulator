@@ -44,7 +44,7 @@ class Reloj {
 
 // Variables  Globales
 let datosApostador;
-const priceDiscount = 50;
+const priceDiscount = 150;
 let priceFinalDiscount;
 const usuarioApostador = [];
 let listaApostadores = [];

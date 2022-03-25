@@ -120,6 +120,7 @@ h1 {
 .formText {
   display: flex;
   flex-direction: row;
+  margin-right: -100px;
 }
 
 .textoInicial {
@@ -263,6 +264,10 @@ h2 {
   justify-content: flex-end;
 }
 
+#montoTotalApuestas {
+  text-align: center;
+}
+
 .eventosPrincipales {
   font-size: 30px;
 }
@@ -276,7 +281,8 @@ h2 {
   width: 200px;
 }
 
-.buttonDeleteAll {
+.buttonDeleteAll,
+.buttonConfirmAllBets {
   display: flex;
   justify-content: flex-end;
 }
@@ -442,4 +448,27 @@ h2 {
 
 #inputTime1 {
   width: 100px;
+}
+
+.bonoBienvenida {
+  background-color: rgb(60, 61, 61);
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0px auto;
+  padding: 3%;
+}
+
+.bonoBienvenidaTexto {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.test1 {
+  display: flex;
 }

@@ -4,7 +4,10 @@ formUsuario.addEventListener("submit", (e) => {
   e.preventDefault();
   leerDatos();
   registroValido = validarRegistro();
-  registroValido && welcome();
+  if (registroValido) {
+    welcome();
+    bonoBienvenida();
+  }
 });
 
 futbolBetButton.addEventListener("click", () => {
