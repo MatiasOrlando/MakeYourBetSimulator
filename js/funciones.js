@@ -216,7 +216,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       this.innerText.replace("$", "")
     );
     montoTotalPagar += valorFinalDeApuesta;
-    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es $${valorFinalDeApuesta}`;
+    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos y bonos incluidos es de $${valorFinalDeApuesta}`;
 
     apuestas.push(new Apuesta(valorFinalDeApuesta, categoria, hora));
     const apuestasRealizadasValor = document.querySelector(
@@ -497,12 +497,13 @@ dark.addEventListener("click", myDarkMode);
 function bonoBienvenida() {
   setTimeout(() => {
     const bono = document.createElement("div");
-    bono.setAttribute("class", "bonoBienvenida");
+    bono.setAttribute("id", "bonoBienvenida");
+    bono.setAttribute("class", "animate__animated animate__bounceInDown");
     const bonoTexto = document.createElement("span");
     bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
-    bonoTexto.innerText = `Disfruta tu bono de bienvenida: $150`;
+    bonoTexto.innerText = `Disfruta tu bono de bienvenida en cada apuesta: $150`;
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
-  }, 1800);
+  }, 1000);
 }

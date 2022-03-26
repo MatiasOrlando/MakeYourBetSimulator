@@ -450,11 +450,11 @@ h2 {
   width: 100px;
 }
 
-.bonoBienvenida {
+#bonoBienvenida {
   background-color: rgb(60, 61, 61);
   border-radius: 50%;
-  height: 150px;
-  width: 150px;
+  height: 170px;
+  width: 170px;
   display: flex;
   justify-content: center;
   align-items: center;
