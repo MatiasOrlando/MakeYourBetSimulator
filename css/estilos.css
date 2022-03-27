@@ -262,10 +262,15 @@ h2 {
 #montoTotalBet {
   display: flex;
   justify-content: flex-end;
+  padding: 3px;
 }
 
-#montoTotalApuestas {
-  text-align: center;
+#montoSubtotalApuestas {
+  padding: 3px;
+}
+
+#priceDiscount {
+  padding: 3px;
 }
 
 .eventosPrincipales {
@@ -327,12 +332,16 @@ h2 {
 
 #montoTotalBet {
   display: flex;
-  flex-direction: column;
 }
 
 #testDiv {
   display: flex;
   justify-content: flex-end;
+}
+
+#infoApuestas {
+  display: flex;
+  flex-direction: column;
 }
 
 #darkMode {

@@ -149,8 +149,7 @@ const restaDescuentoPromocional = (a, b) => a - b;
 function calcularPrecioFinal(precio) {
   const priceOfTax = taxPrice(parseInt(precio));
   const priceWithTax = suma(precio, priceOfTax);
-  priceFinalDiscount = restaDescuentoPromocional(priceWithTax, priceDiscount);
-  return priceFinalDiscount;
+  return priceWithTax;
 }
 
 // Funcion que me permite devolver valores de acuerdo al filtro categorias checkbox seleccinado
@@ -216,13 +215,17 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       this.innerText.replace("$", "")
     );
     montoTotalPagar += valorFinalDeApuesta;
-    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos y bonos incluidos es de $${valorFinalDeApuesta}`;
+    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es de $${valorFinalDeApuesta}`;
 
     apuestas.push(new Apuesta(valorFinalDeApuesta, categoria, hora));
     const apuestasRealizadasValor = document.querySelector(
       "#montoTotalApuestas"
     );
-    apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+    const subTotalApuestas = document.querySelector("#montoSubtotalApuestas");
+    const bonoDiscount = document.querySelector("#priceDiscount");
+    bonoDiscount.innerText = `Bono: - $150`;
+    subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
+    apuestasRealizadasValor.innerText = ` $${montoTotalPagar - priceDiscount}`;
 
     apuestaNueva.appendChild(botonBorrarApuesta);
     listaApuestas.appendChild(apuestaNueva);
@@ -254,7 +257,15 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         pokerBetting.innerText = pokFil;
       }
       montoTotalPagar -= valorFinalDeApuesta;
-      apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+      subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
+      if (apuestas.length >= 1) {
+        apuestasRealizadasValor.innerText = `$${
+          montoTotalPagar - priceDiscount
+        }`;
+      } else {
+        apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+      }
+
       apuestaNueva.remove();
     }
 
@@ -332,7 +343,8 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     function deleteAllBets() {
       datosApostador.apuestas = [];
       montoTotalPagar = 0;
-      apuestasRealizadasValor.innerText = montoTotalPagar;
+      subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
+      apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
       apuestaNueva.remove();
       swal("Todas las apuestas han sido borradas");
       let futFil2 = filterFutbol2().map(function (bet) {
@@ -380,7 +392,8 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
             swal("Apuestas canceladas, vuelva pronto", { icon: "error" });
             datosApostador.apuestas = [];
             montoTotalPagar = 0;
-            apuestasRealizadasValor.innerText = montoTotalPagar;
+            apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+            subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
             listaApuestas.innerText = "";
           }
         });
@@ -501,7 +514,7 @@ function bonoBienvenida() {
     bono.setAttribute("class", "animate__animated animate__bounceInDown");
     const bonoTexto = document.createElement("span");
     bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
-    bonoTexto.innerText = `Disfruta tu bono de bienvenida en cada apuesta: $150`;
+    bonoTexto.innerText = `Disfruta hoy tu bono de bienvenida: $150`;
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
