@@ -506,7 +506,6 @@ const dark = document.querySelector("#darkMode");
 dark.addEventListener("click", myDarkMode);
 
 // Funcion Bono Bienvenida
-
 function bonoBienvenida() {
   setTimeout(() => {
     const bono = document.createElement("div");
