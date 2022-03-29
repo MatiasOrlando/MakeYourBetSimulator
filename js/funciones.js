@@ -542,6 +542,7 @@ function bonoBienvenida() {
   }, 1000);
 }
 
+// Funcion API Dolar
 function dolarValue() {
   if (testDolar) {
     let url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
@@ -579,26 +580,33 @@ function dolarValue() {
   }
 }
 
+// Funcion API Bitcoin
 function bitcoinValue() {
   if (testBitcoin) {
     let url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
+    const datosCripto = async () => {
+      try {
+        function mostrarInfo(data) {
+          const nodo = document.querySelector("#bitcoin");
+          bitCoinValueOficial = document.createElement("li");
+          bitCoinValueOficial.style.listStyleType = "none";
+          let bitCoinValue = data.USD;
+
+          bitCoinValueOficial.innerHTML = `1 BTC = U$S${bitCoinValue}`;
+
+          nodo.appendChild(bitCoinValueOficial);
+        }
+        const res = await fetch(url);
+        const json = await res.json();
         mostrarInfo(json);
-      });
+      } catch {
+        swal(`Valor momentáneamente no disponible`);
+      }
+    };
 
-    function mostrarInfo(data) {
-      const nodo = document.querySelector("#bitcoin");
-      bitCoinValueOficial = document.createElement("li");
-      bitCoinValueOficial.style.listStyleType = "none";
-      let bitCoinValue = data.USD;
+    datosCripto();
 
-      bitCoinValueOficial.innerHTML = `1 BTC = U$S${bitCoinValue}`;
-
-      nodo.appendChild(bitCoinValueOficial);
-    }
     checkBitcoinValue.innerHTML = "Cerrar";
     testBitcoin = false;
   } else {
