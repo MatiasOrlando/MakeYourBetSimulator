@@ -78,7 +78,8 @@ function welcome() {
 
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
 function validarRegistro() {
-  const { edad } = datosApostador;
+  const { edad, mail } = datosApostador;
+  validarCorreo(mail);
   if (
     nombre.trim() === "" ||
     apellido.trim() === "" ||
@@ -120,6 +121,15 @@ function validarRegistro() {
       formRegistro.appendChild(invalidTime);
       return false;
     }
+    if (!validarCorreo(mail)) {
+      const invalidMail = document.createElement("h2");
+      invalidMail.classList.add("tituloWelcomeInvalidAge");
+      invalidMail.innerText = "Debe ingresar un correo válido para apostar";
+      tituloFormRegistro.remove();
+      formUsuarioApostador.remove();
+      formRegistro.appendChild(invalidMail);
+      return false;
+    }
     return true;
   } else if (isNaN(edad)) {
     const tituloInvalidAge = document.createElement("h2");
@@ -137,6 +147,18 @@ function validarRegistro() {
     formUsuarioApostador.remove();
     formRegistro.appendChild(tituloUnderAge);
     return false;
+  }
+
+  // Funcion validar correo
+  function validarCorreo(correo) {
+    let expReg =
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    let correoValido = expReg.test(correo);
+    if (!correoValido) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
@@ -212,10 +234,10 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     botonBorrarApuesta.setAttribute("class", "btn btn-danger");
 
     const valorFinalDeApuesta = calcularPrecioFinal(
-      this.innerText.replace("$", "")
+      this.innerText.replace("U$S", "")
     );
     montoTotalPagar += valorFinalDeApuesta;
-    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es de $${valorFinalDeApuesta}`;
+    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es de U$S${valorFinalDeApuesta}`;
 
     apuestas.push(new Apuesta(valorFinalDeApuesta, categoria, hora));
     const apuestasRealizadasValor = document.querySelector(
@@ -223,9 +245,9 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     );
     const subTotalApuestas = document.querySelector("#montoSubtotalApuestas");
     const bonoDiscount = document.querySelector("#priceDiscount");
-    bonoDiscount.innerText = `Bono: - $150`;
-    subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
-    apuestasRealizadasValor.innerText = ` $${montoTotalPagar - priceDiscount}`;
+    bonoDiscount.innerText = `Bono: - U$S150`;
+    subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
+    apuestasRealizadasValor.innerText = `U$S${montoTotalPagar - priceDiscount}`;
 
     apuestaNueva.appendChild(botonBorrarApuesta);
     listaApuestas.appendChild(apuestaNueva);
@@ -242,14 +264,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         apuestas.splice(index, 1);
 
         let futFil = filterFutbol().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
 
         let cabFil = filterCaballos().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
         let pokFil = filterPoker().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
         });
 
         futbolBetting.innerText = futFil;
@@ -257,13 +279,13 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         pokerBetting.innerText = pokFil;
       }
       montoTotalPagar -= valorFinalDeApuesta;
-      subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
+      subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
       if (apuestas.length >= 1) {
-        apuestasRealizadasValor.innerText = `$${
+        apuestasRealizadasValor.innerText = `U$S${
           montoTotalPagar - priceDiscount
         }`;
       } else {
-        apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+        apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
       }
 
       apuestaNueva.remove();
@@ -276,15 +298,15 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const pokerBetting = document.querySelector("#g-03");
 
     let futFilter = filterFutbol().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     let cabFilter = filterCaballos().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     let pokFilter = filterPoker().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
     });
 
     futbolBetting.innerText = futFilter;
@@ -343,19 +365,19 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     function deleteAllBets() {
       datosApostador.apuestas = [];
       montoTotalPagar = 0;
-      subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
-      apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
+      subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
+      apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
       apuestaNueva.remove();
       swal("Todas las apuestas han sido borradas");
       let futFil2 = filterFutbol2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
 
       let cabFil2 = filterCaballos2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
       let pokFil2 = filterPoker2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: $${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
       });
 
       futbolBetting.innerText = futFil2;
@@ -392,8 +414,8 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
             swal("Apuestas canceladas, vuelva pronto", { icon: "error" });
             datosApostador.apuestas = [];
             montoTotalPagar = 0;
-            apuestasRealizadasValor.innerText = `$${montoTotalPagar}`;
-            subTotalApuestas.innerText = `Subtotal: $${montoTotalPagar}`;
+            apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
+            subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
             listaApuestas.innerText = "";
           }
         });
@@ -513,9 +535,75 @@ function bonoBienvenida() {
     bono.setAttribute("class", "animate__animated animate__bounceInDown");
     const bonoTexto = document.createElement("span");
     bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
-    bonoTexto.innerText = `Disfruta hoy tu bono de bienvenida: $150`;
+    bonoTexto.innerText = `Disfruta hoy tu bono de bienvenida: U$S150`;
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
   }, 1000);
+}
+
+function dolarValue() {
+  if (testDolar) {
+    let url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        mostrarInfo(json);
+      })
+      .catch(() => errorApiDolar());
+
+    function errorApiDolar() {
+      swal(`Valores momentáneamente no disponibles`);
+    }
+
+    function mostrarInfo(data) {
+      const nodo = document.querySelector("#dolar");
+      dolarValueOficial = document.createElement("li");
+      let valorDolarOficial = data
+        .filter((x) => x.casa.nombre === "Dolar Oficial")
+        .map(function (el) {
+          return `Tipo: ${el.casa.nombre}, Compra: $${el.casa.compra}, Venta: ${el.casa.venta}`;
+        });
+
+      dolarValueOficial.innerHTML = valorDolarOficial;
+      dolarValueOficial.style.listStyleType = "none";
+
+      nodo.appendChild(dolarValueOficial);
+    }
+    checkDolarValue.innerHTML = "Cerrar";
+    testDolar = false;
+  } else {
+    dolarValueOficial.remove();
+    checkDolarValue.innerHTML = "Cotización Dólar Hoy";
+    testDolar = true;
+  }
+}
+
+function bitcoinValue() {
+  if (testBitcoin) {
+    let url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) => {
+        mostrarInfo(json);
+      });
+
+    function mostrarInfo(data) {
+      const nodo = document.querySelector("#bitcoin");
+      bitCoinValueOficial = document.createElement("li");
+      bitCoinValueOficial.style.listStyleType = "none";
+      let bitCoinValue = data.USD;
+
+      bitCoinValueOficial.innerHTML = `1 BTC = U$S${bitCoinValue}`;
+
+      nodo.appendChild(bitCoinValueOficial);
+    }
+    checkBitcoinValue.innerHTML = "Cerrar";
+    testBitcoin = false;
+  } else {
+    bitCoinValueOficial.remove();
+    checkBitcoinValue.innerHTML = "Cotización BitCoin - U$S";
+    testBitcoin = true;
+  }
 }

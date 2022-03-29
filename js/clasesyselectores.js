@@ -55,6 +55,10 @@ let desplegarMenuCaballos = true;
 let desplegarMenuPoker = true;
 let apuestasOnGameStorage = [];
 let onlineBet = [];
+let dolarValueBlue;
+let dolarValueOficial;
+let testDolar = true;
+let testBitcoin = true;
 
 // Variables Globales Datos Personales
 let nombre;
@@ -75,3 +79,5 @@ const futbolBetButton = document.querySelector("#apuestasFutbol1");
 const pokerBetButton = document.querySelector("#apuestasPoker1");
 const caballosBetButton = document.querySelector("#apuestasCaballos1");
 const filterButton = document.querySelector("#filterButton");
+const checkDolarValue = document.querySelector("#dolarCotizacion");
+const checkBitcoinValue = document.querySelector("#bitcoinCotizacion");
