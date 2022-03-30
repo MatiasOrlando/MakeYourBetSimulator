@@ -12,8 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <script
-        src="https://cdn.polyfill.io/v3/polyfill.js?features=default,String.prototype.repeat,Array.prototype.find,Array.prototype.findIndex,Math.trunc,Math.sign,Object.is"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Make your Bet Simulador</title>
 </head>
@@ -197,6 +195,7 @@
                                 <button type="button" class="btn btn-outline-dark mb-4" id="buttonCaballos1">
                                     Ver más
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -246,9 +245,14 @@
                         pasión en nuestra plataforma. </p>
                 </div>
                 <div class="btnAbajoDos">
-                    <button type="submit" class="btn btn-outline-dark mb-4" id="apuestasCaballos1">
-                        Apuesta ahora
-                    </button>
+                    <div class="btnsCaballos">
+                        <button type="submit" class="btn btn-outline-dark mb-4" id="apuestasCaballos1">
+                            Apuesta ahora
+                        </button>
+                        <button id="caballosCompetencia" class="btn btn-outline-dark">Información Caballos
+                            Competidores</button>
+                    </div>
+                    <div id="horseRunners"></div>
                 </div>
             </div>
             <div class="topo">
@@ -333,6 +337,8 @@
             <div id="dolar"></div>
             <button id="bitcoinCotizacion">Cotización BitCoin - U$S</button>
             <div id="bitcoin"></div>
+            <button id="top5">Top 5 Ganadores esta semana</button>
+            <div class="topPlayers"></div>
 
         </div>
 
@@ -443,13 +449,14 @@
         </script>
         <script src="./js/orden.js">
         </script>
+        <script
+            src="https://cdn.polyfill.io/v3/polyfill.js?features=default,String.prototype.repeat,Array.prototype.find,Array.prototype.findIndex,Math.trunc,Math.sign,Object.is"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 
 </body>

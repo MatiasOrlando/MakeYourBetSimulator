@@ -79,7 +79,6 @@ function welcome() {
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
 function validarRegistro() {
   const { edad, mail } = datosApostador;
-  validarCorreo(mail);
   if (
     nombre.trim() === "" ||
     apellido.trim() === "" ||
@@ -613,5 +612,84 @@ function bitcoinValue() {
     bitCoinValueOficial.remove();
     checkBitcoinValue.innerHTML = "Cotización BitCoin - U$S";
     testBitcoin = true;
+  }
+}
+
+// Funcion APi JSONplaceholder fakeusers top5
+function top5() {
+  if (top5Winners) {
+    fetch("https://jsonplaceholder.typicode.com/users/")
+      .then((response) => response.json())
+      .then((json) => mostrarInfo(json))
+      .catch(() => swal("Informacion no disponible"));
+
+    function mostrarInfo(data) {
+      nodoTop5 = document.querySelector(".topPlayers");
+      nodoTop5.innerHTML = "";
+      data
+        .filter((x) => x.id <= 5)
+        .forEach((element) => {
+          let top5data = document.createElement("li");
+          top5data.style.listStyleType = "none";
+          top5data.innerHTML = `Usuario: ${element.username},
+                                    Rank: ${element.id} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg>`;
+          nodoTop5.appendChild(top5data);
+          nodoTop5.style.display = "block";
+        });
+    }
+    top5week.innerHTML = "Cerrar";
+    top5Winners = false;
+  } else {
+    nodoTop5.style.display = "none";
+    top5week.innerHTML = "Top 5 Ganadores esta semana";
+    top5Winners = true;
+  }
+}
+
+// Funcion APi Info Caballos Corredores
+function infoCarreraCaballos() {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Host": "horse-racing.p.rapidapi.com",
+      "X-RapidAPI-Key": "4952590a94msh7662f4d44b46052p170f00jsn9b9fc11fc618",
+    },
+  };
+
+  fetch("https://horse-racing.p.rapidapi.com/race/207660", options)
+    .then((response) => response.json())
+    .then((json) => {
+      mostrarInfo(json);
+    })
+    .catch(() => swal("Informacion no disponible"));
+
+  function mostrarInfo(data) {
+    const divHorse = document.querySelector("#horseRunners");
+    divHorse.innerHTML = "";
+    const table = document.createElement("table");
+    table.setAttribute("class", "table table-hover table-bordered");
+    table.innerHTML = `<thead>
+            <tr>
+              <th>Caballos</th>
+              <th>Edad</th>
+              <th>Jockey</th>
+              <th>Trainer</th>
+            </tr>
+          </thead>`;
+    const tbody = document.createElement("tbody");
+
+    data.horses.forEach((el) => {
+      let topHorses = document.createElement("tr");
+      topHorses.innerHTML = `<td>${el.horse}</td>
+                      <td>${el.age}</td>
+                      <td>${el.jockey}</td>
+                      <td>${el.trainer}</td>`;
+
+      tbody.appendChild(topHorses);
+    });
+    table.appendChild(tbody);
+    divHorse.appendChild(table);
   }
 }

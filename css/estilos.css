@@ -51,6 +51,7 @@ h1 {
 }
 .probando .topo .btnAbajoDos {
   font-family: "Roboto";
+  width: 150px;
 }
 .probando .topo .pelotaSize,
 .probando .topo .caballosSize,
@@ -480,4 +481,9 @@ h2 {
 
 .test1 {
   display: flex;
+}
+
+.btnsCaballos {
+  display: flex;
+  flex-direction: column;
 }

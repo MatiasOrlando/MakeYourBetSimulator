@@ -57,8 +57,10 @@ let apuestasOnGameStorage = [];
 let onlineBet = [];
 let dolarValueBlue;
 let dolarValueOficial;
+let nodoTop5;
 let testDolar = true;
 let testBitcoin = true;
+let top5Winners = true;
 
 // Variables Globales Datos Personales
 let nombre;
@@ -81,3 +83,5 @@ const caballosBetButton = document.querySelector("#apuestasCaballos1");
 const filterButton = document.querySelector("#filterButton");
 const checkDolarValue = document.querySelector("#dolarCotizacion");
 const checkBitcoinValue = document.querySelector("#bitcoinCotizacion");
+const top5week = document.querySelector("#top5");
+const botonCaballosCompetencia = document.querySelector("#caballosCompetencia");

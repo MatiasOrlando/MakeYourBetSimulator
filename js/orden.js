@@ -44,5 +44,8 @@ buttonFutbol.addEventListener("click", apuestasFutbolEvento);
 caballosButton.addEventListener("click", apuestasCaballosEvento);
 pokerButton.addEventListener("click", apuestasPokerEvento);
 
+//Eventos que solicitan APIS
 checkDolarValue.addEventListener("click", () => dolarValue());
 checkBitcoinValue.addEventListener("click", () => bitcoinValue());
+top5week.addEventListener("click", () => top5());
+caballosCompetencia.addEventListener("click", () => infoCarreraCaballos());
