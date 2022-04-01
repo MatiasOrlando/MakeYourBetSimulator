@@ -686,7 +686,7 @@ function infoCarreraCaballos() {
       .then((json) => {
         mostrarInfo(json);
       })
-      .catch(() => swal("Informacion no disponible"));
+      .catch(() => swal("Información no disponible"));
 
     function mostrarInfo(data) {
       divHorse.innerHTML = "";
@@ -717,7 +717,6 @@ function infoCarreraCaballos() {
     botonInfoCaballos.innerHTML = "Cerrar";
     infoHorses = false;
   } else {
-    // divHorse.remove();
     divHorse.style.display = "none";
     botonInfoCaballos.innerHTML = "Información Caballos Competidores";
     infoHorses = true;
