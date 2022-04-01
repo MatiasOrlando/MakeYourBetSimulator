@@ -22,10 +22,12 @@ class Apostador {
 
 // Clase Informacion de la Apuesta
 class Apuesta {
-  constructor(valor, categoria, hora) {
+  constructor(id, valor, categoria, hora) {
+    this.id = id;
     this.valor = valor;
     this.categoria = categoria;
     this.hora = hora;
+    idApuesta++;
   }
 }
 
@@ -43,6 +45,7 @@ class Reloj {
 }
 
 // Variables  Globales
+let idApuesta = 0;
 let datosApostador;
 const priceDiscount = 150;
 let priceFinalDiscount;
@@ -61,6 +64,7 @@ let nodoTop5;
 let testDolar = true;
 let testBitcoin = true;
 let top5Winners = true;
+let infoHorses = true;
 
 // Variables Globales Datos Personales
 let nombre;

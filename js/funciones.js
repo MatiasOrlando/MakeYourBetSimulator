@@ -211,6 +211,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
   valorApuesta2.addEventListener("click", clickvalor);
 
   valorApuesta3.addEventListener("click", clickvalor);
+
   function clickvalor() {
     Toastify({
       text: "Apuesta agregada",
@@ -226,37 +227,59 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const { apuestas } = datosApostador;
     const divApuestasRealizadas = document.querySelector("#apuestasRealizadas");
     divApuestasRealizadas.style.display = "block";
-    const listaApuestas = document.querySelector("#listaApuestasRealizadas");
-    const apuestaNueva = document.createElement("li");
-    const botonBorrarApuesta = document.createElement("button");
-    botonBorrarApuesta.innerText = "Borrar";
-    botonBorrarApuesta.setAttribute("class", "btn btn-danger");
+    const tablaApuestas = document.querySelector("#tableApuestas");
+    tablaApuestas.setAttribute(
+      "class",
+      "table table-hover table-bordered table-dark"
+    );
+    const tbody1 = document.querySelector("#tBody");
+    const apuestaNueva = document.createElement("tr");
 
     const valorFinalDeApuesta = calcularPrecioFinal(
       this.innerText.replace("U$S", "")
     );
-    montoTotalPagar += valorFinalDeApuesta;
-    apuestaNueva.innerText = `Categoría: ${categoria}, Monto ${this.innerText}, Horario: ${hora}. El monto final a pagar con impuestos incluidos es de U$S${valorFinalDeApuesta}`;
 
-    apuestas.push(new Apuesta(valorFinalDeApuesta, categoria, hora));
+    montoTotalPagar += valorFinalDeApuesta;
+
+    apuestaNueva.innerHTML = `<td>${categoria}</td>
+                      <td>${this.innerText}</td>
+                      <td>U$S${valorFinalDeApuesta}</td>
+                      <td>${hora}</td>
+                      <td>
+                      <button id="btnDelete${idApuesta}" class="btn btn-danger">
+                            Eliminar
+                      </button></td>`;
+    let apuestaNew = new Apuesta(
+      idApuesta,
+      valorFinalDeApuesta,
+      categoria,
+      hora
+    );
+    apuestas.push(apuestaNew);
     const apuestasRealizadasValor = document.querySelector(
       "#montoTotalApuestas"
     );
+
     const subTotalApuestas = document.querySelector("#montoSubtotalApuestas");
     const bonoDiscount = document.querySelector("#priceDiscount");
     bonoDiscount.innerText = `Bono: - U$S150`;
     subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
     apuestasRealizadasValor.innerText = `U$S${montoTotalPagar - priceDiscount}`;
 
-    apuestaNueva.appendChild(botonBorrarApuesta);
-    listaApuestas.appendChild(apuestaNueva);
+    tbody1.appendChild(apuestaNueva);
+    tablaApuestas.appendChild(tbody1);
+
+    const btnDeleteBet = document.querySelector(`#btnDelete${apuestaNew.id}`);
+
+    btnDeleteBet.addEventListener("click", () => deleteBet(apuestaNew.id));
 
     // Funcion que permite borrar apuestas al usuario
-    function deleteBet() {
+    function deleteBet(idApuesta) {
       let apuestaElegidaBorrar = apuestas.find(
-        (apuesta) => apuesta.valor === valorFinalDeApuesta
+        (apuesta) => apuesta.id === idApuesta
       );
 
+      console.log(apuestaElegidaBorrar);
       if (apuestaElegidaBorrar) {
         const index = apuestas.indexOf(apuestaElegidaBorrar);
 
@@ -286,11 +309,8 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       } else {
         apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
       }
-
       apuestaNueva.remove();
     }
-
-    botonBorrarApuesta.addEventListener("click", () => deleteBet());
 
     const futbolBetting = document.querySelector("#g-01");
     const caballosBetting = document.querySelector("#g-02");
@@ -347,15 +367,16 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     filterButton.addEventListener("click", () => filtrarApuestas());
 
     let filter = true;
+    const montosApuestas = document.querySelector("#montosApuestas");
 
     function filtrarApuestas() {
       if (filter) {
-        listaApuestas.remove();
+        tablaApuestas.remove();
         filterButton.innerText = "Ver todas las apuestas";
         filter = false;
       } else {
         filterButton.innerText = "Filtrar por Categoría";
-        divConfirmAllbets.insertAdjacentElement("beforebegin", listaApuestas);
+        montosApuestas.insertAdjacentElement("beforebegin", tablaApuestas);
         filter = true;
       }
     }
@@ -415,14 +436,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
             montoTotalPagar = 0;
             apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
             subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
-            listaApuestas.innerText = "";
+            tbody1.innerHTML = "";
           }
         });
       } else {
         return false;
       }
     }
-    const divConfirmAllbets = document.querySelector(".buttonConfirmAllBets");
+
     const confirmBet = document.querySelector("#confirmBet");
     confirmBet.addEventListener("click", () => confirmAllBets());
   }
@@ -522,7 +543,6 @@ function myDarkMode() {
   let element = document.body;
   element.classList.toggle("dark-mode");
 }
-
 const dark = document.querySelector("#darkMode");
 dark.addEventListener("click", myDarkMode);
 
@@ -650,27 +670,29 @@ function top5() {
 
 // Funcion APi Info Caballos Corredores
 function infoCarreraCaballos() {
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Host": "horse-racing.p.rapidapi.com",
-      "X-RapidAPI-Key": "4952590a94msh7662f4d44b46052p170f00jsn9b9fc11fc618",
-    },
-  };
+  const botonInfoCaballos = document.querySelector("#caballosCompetencia");
+  const divHorse = document.querySelector("#horseRunners");
+  if (infoHorses) {
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Host": "horse-racing.p.rapidapi.com",
+        "X-RapidAPI-Key": "4952590a94msh7662f4d44b46052p170f00jsn9b9fc11fc618",
+      },
+    };
 
-  fetch("https://horse-racing.p.rapidapi.com/race/207660", options)
-    .then((response) => response.json())
-    .then((json) => {
-      mostrarInfo(json);
-    })
-    .catch(() => swal("Informacion no disponible"));
+    fetch("https://horse-racing.p.rapidapi.com/race/207660", options)
+      .then((response) => response.json())
+      .then((json) => {
+        mostrarInfo(json);
+      })
+      .catch(() => swal("Informacion no disponible"));
 
-  function mostrarInfo(data) {
-    const divHorse = document.querySelector("#horseRunners");
-    divHorse.innerHTML = "";
-    const table = document.createElement("table");
-    table.setAttribute("class", "table table-hover table-bordered");
-    table.innerHTML = `<thead>
+    function mostrarInfo(data) {
+      divHorse.innerHTML = "";
+      const table = document.createElement("table");
+      table.setAttribute("class", "table table-hover table-bordered");
+      table.innerHTML = `<thead>
             <tr>
               <th>Caballos</th>
               <th>Edad</th>
@@ -678,18 +700,26 @@ function infoCarreraCaballos() {
               <th>Trainer</th>
             </tr>
           </thead>`;
-    const tbody = document.createElement("tbody");
-
-    data.horses.forEach((el) => {
-      let topHorses = document.createElement("tr");
-      topHorses.innerHTML = `<td>${el.horse}</td>
+      const tbodyHorses = document.createElement("tbody");
+      divHorse.style.display = "block";
+      data.horses.forEach((el) => {
+        let topHorses = document.createElement("tr");
+        topHorses.innerHTML = `<td>${el.horse}</td>
                       <td>${el.age}</td>
                       <td>${el.jockey}</td>
                       <td>${el.trainer}</td>`;
 
-      tbody.appendChild(topHorses);
-    });
-    table.appendChild(tbody);
-    divHorse.appendChild(table);
+        tbodyHorses.appendChild(topHorses);
+      });
+      table.appendChild(tbodyHorses);
+      divHorse.appendChild(table);
+    }
+    botonInfoCaballos.innerHTML = "Cerrar";
+    infoHorses = false;
+  } else {
+    // divHorse.remove();
+    divHorse.style.display = "none";
+    botonInfoCaballos.innerHTML = "Información Caballos Competidores";
+    infoHorses = true;
   }
 }

@@ -199,6 +199,9 @@
                             </div>
                         </div>
                     </div>
+                    <button id="caballosCompetencia" class="btn btn-outline-dark">Información Caballos
+                        Competidores</button>
+                    <div id="horseRunners"></div>
                 </div>
             </div>
         </div>
@@ -249,10 +252,8 @@
                         <button type="submit" class="btn btn-outline-dark mb-4" id="apuestasCaballos1">
                             Apuesta ahora
                         </button>
-                        <button id="caballosCompetencia" class="btn btn-outline-dark">Información Caballos
-                            Competidores</button>
                     </div>
-                    <div id="horseRunners"></div>
+
                 </div>
             </div>
             <div class="topo">
@@ -295,17 +296,9 @@
         <div style="display: none;" id="apuestasRealizadas">
 
 
-            <h4>Apuestas Realizadas
-
-                <div id="testDiv">
-                    <div id="infoApuestas">
-                        <div><span id="montoSubtotalApuestas"></span></div>
-                        <div><span id="priceDiscount"></span></div>
-                        <div id="montoTotalBet">Monto total: <span id="montoTotalApuestas"></span></div>
-                    </div>
-                </div>
+            <h4 class="madeBets">Apuestas realizadas
             </h4>
-            <div class="filter">
+            <div class="filter" id="divfiltroDeApuestas">
 
                 <button type="button" class="btn btn-success" id="filterButton">Filtrar por categoría</button>
                 <div class="checkBoxFil">
@@ -323,9 +316,29 @@
             <p id="g-03" style="display:none">
             </p>
 
-            <ul id="listaApuestasRealizadas">
-            </ul>
 
+            <table id="tableApuestas">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Valor Total(taxes incluidos)</th>
+                        <th>Hora</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="tBody">
+
+                </tbody>
+            </table>
+
+            <div id="montosApuestas">
+                <div id="infoApuestas">
+                    <div><span id="montoSubtotalApuestas"></span></div>
+                    <div><span id="priceDiscount"></span></div>
+                    <div id="montoTotalBet">Monto total: <span id="montoTotalApuestas"></span></div>
+                </div>
+            </div>
 
             <div class="buttonConfirmAllBets">
                 <button type="button" class="btn btn-primary" id="confirmBet">Confirmar Apuestas</button>
