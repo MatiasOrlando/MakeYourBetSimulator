@@ -108,7 +108,6 @@ function validarRegistro() {
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
-
       return false;
     }
     if (hora != localHour) {
@@ -447,6 +446,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const confirmBet = document.querySelector("#confirmBet");
     confirmBet.addEventListener("click", () => confirmAllBets());
   }
+
   divApuesta.style.display = "block";
 }
 
@@ -563,99 +563,74 @@ function bonoBienvenida() {
 
 // Funcion API Dolar
 function dolarValue() {
-  if (testDolar) {
-    let url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) => {
-        mostrarInfo(json);
-      })
-      .catch(() => errorApiDolar());
+  let url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
+  fetch(url)
+    .then((res) => res.json())
+    .then((json) => {
+      mostrarInfo(json);
+    })
+    .catch(() => errorApiDolar());
 
-    function errorApiDolar() {
-      swal(`Valores momentáneamente no disponibles`);
-    }
+  function errorApiDolar() {
+    swal(`Valores momentáneamente no disponibles`);
+  }
 
-    function mostrarInfo(data) {
-      const nodo = document.querySelector("#dolar");
-      dolarValueOficial = document.createElement("li");
-      let valorDolarOficial = data
-        .filter((x) => x.casa.nombre === "Dolar Oficial")
-        .map(function (el) {
-          return `Tipo: ${el.casa.nombre}, Compra: $${el.casa.compra}, Venta: ${el.casa.venta}`;
-        });
+  function mostrarInfo(data) {
+    let valorDolarOficial = data
+      .filter((x) => x.casa.nombre === "Dolar Oficial")
+      .map(function (el) {
+        return `Compra: $${el.casa.compra} AR Venta: $${el.casa.venta} AR`;
+      });
 
-      dolarValueOficial.innerHTML = valorDolarOficial;
-      dolarValueOficial.style.listStyleType = "none";
-
-      nodo.appendChild(dolarValueOficial);
-    }
-    checkDolarValue.innerHTML = "Cerrar";
-    testDolar = false;
-  } else {
-    dolarValueOficial.remove();
-    checkDolarValue.innerHTML = "Cotización Dólar Hoy";
-    testDolar = true;
+    valorDelDolar.innerHTML = valorDolarOficial;
   }
 }
-
 // Funcion API Bitcoin
 function bitcoinValue() {
-  if (testBitcoin) {
-    let url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
+  let url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
 
-    const datosCripto = async () => {
-      try {
-        function mostrarInfo(data) {
-          const nodo = document.querySelector("#bitcoin");
-          bitCoinValueOficial = document.createElement("li");
-          bitCoinValueOficial.style.listStyleType = "none";
-          let bitCoinValue = data.USD;
-
-          bitCoinValueOficial.innerHTML = `1 BTC = U$S${bitCoinValue}`;
-
-          nodo.appendChild(bitCoinValueOficial);
-        }
-        const res = await fetch(url);
-        const json = await res.json();
-        mostrarInfo(json);
-      } catch {
-        swal(`Valor momentáneamente no disponible`);
+  const datosCripto = async () => {
+    try {
+      function mostrarInfo(data) {
+        let bitCoinValue = data.USD;
+        valorBtc.innerHTML = `1 BTC = U$S${bitCoinValue}`;
       }
-    };
+      const res = await fetch(url);
+      const json = await res.json();
+      mostrarInfo(json);
+    } catch {
+      swal(`Valor momentáneamente no disponible`);
+    }
+  };
 
-    datosCripto();
-
-    checkBitcoinValue.innerHTML = "Cerrar";
-    testBitcoin = false;
-  } else {
-    bitCoinValueOficial.remove();
-    checkBitcoinValue.innerHTML = "Cotización BitCoin - U$S";
-    testBitcoin = true;
-  }
+  datosCripto();
 }
-
 // Funcion APi JSONplaceholder fakeusers top5
 function top5() {
   if (top5Winners) {
     fetch("https://jsonplaceholder.typicode.com/users/")
       .then((response) => response.json())
       .then((json) => mostrarInfo(json))
-      .catch(() => swal("Informacion no disponible"));
+      .catch(() => swal("Información no disponible"));
 
     function mostrarInfo(data) {
       nodoTop5 = document.querySelector(".topPlayers");
+      const top5players = document.createElement("div");
+      top5players.setAttribute("class", "card");
+      top5players.setAttribute("style", "width: 18rem;");
       nodoTop5.innerHTML = "";
       data
         .filter((x) => x.id <= 5)
         .forEach((element) => {
           let top5data = document.createElement("li");
+          top5data.setAttribute("class", "list-group-item bg-light");
           top5data.style.listStyleType = "none";
           top5data.innerHTML = `Usuario: ${element.username},
                                     Rank: ${element.id} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 </svg>`;
-          nodoTop5.appendChild(top5data);
+          top5players.appendChild(top5data);
+          nodoTop5.appendChild(top5players);
           nodoTop5.style.display = "block";
         });
     }

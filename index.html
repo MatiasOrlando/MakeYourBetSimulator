@@ -49,16 +49,16 @@
                         <form action="" class="row g-3" id="formUsuarioApostador">
                             <div class="col-md-6">
                                 <label for="inputEmail4" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="inputName1" required>
+                                <input type="text" class="form-control" id="inputName1" name="name" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputPassword4" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="inputLastName1" required>
+                                <input type="text" class="form-control" id="inputLastName1" name="lastname" required>
                             </div>
                             <div class="col-12">
                                 <label for="inputAddress" class="form-label">Email</label>
-                                <input type="mail" class="form-control" id="inputEmail1" placeholder="xxx@gmail.com"
-                                    required>
+                                <input type="mail" class="form-control" id="inputEmail1" name="mail"
+                                    placeholder="xxx@gmail.com" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="inputCity" class="form-label">País
@@ -283,24 +283,56 @@
         </section>
 
         <div id="categoriaApuesta" style="display: none;">
-            <h4 id="tituloApuesta">
-            </h4>
-            <ul class="valoresDeApuesta">
-                <li><button type="button" class="btn btn-dark" id="apuestaValor1"></button></li>
-                <li><button type="button" class="btn btn-dark" id="apuestaValor2"></button></li>
-                <li><button type="button" class="btn btn-dark" id="apuestaValor3"></button></li>
-            </ul>
+            <div class="flexApuestas">
+                <div class="columnaInfoApuestas">
+                    <h4 id="tituloApuesta">
+                    </h4>
+
+
+                    <ul class="valoresDeApuesta">
+                        <li><button type="button" class="btn btn-dark" id="apuestaValor1"></button></li>
+                        <li><button type="button" class="btn btn-dark" id="apuestaValor2"></button></li>
+                        <li><button type="button" class="btn btn-dark" id="apuestaValor3"></button></li>
+                    </ul>
+                </div>
+                <div class="columnaTop5">
+                    <button id="top5" class="btn btn-dark">TOP 5 Ganadores esta semana</button>
+                    <div class="topPlayers">
+                    </div>
+                </div>
+            </div>
         </div>
 
 
         <div style="display: none;" id="apuestasRealizadas">
 
+            <div class="estilosDolarBtc">
+                <h4 class="madeBets">Apuestas realizadas:
+                </h4>
+                <div class="cotizacionMonedas">
+                    <div class="card bg-light mb-3" style="max-width: 12rem;" id="cotization1">
+                        <div class="card-header">
+                            <h4 class="estiloSpanDolar"> Valor Dólar oficial:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p id="valorDolarPesos" class="card-title"> Ver
+                                Cotización</p>
+                        </div>
+                    </div>
+                    <div class="card bg-light mb-3" style="max-width: 12rem;" id="cotization2">
+                        <div class="card-header">
+                            <h4 class="estiloSpanDolar"> Valor Bitcoin:</h4>
+                        </div>
+                        <div class="card-body">
+                            <p id="valorDolarBtc" class="card-title"> Ver
+                                Cotización</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <h4 class="madeBets">Apuestas realizadas
-            </h4>
             <div class="filter" id="divfiltroDeApuestas">
-
-                <button type="button" class="btn btn-success" id="filterButton">Filtrar por categoría</button>
+                <button type="button" class="btn btn-primary" id="filterButton">Filtrar por categoría</button>
                 <div class="checkBoxFil">
                     <input type="checkbox" value="g-01" onclick="test(this)">Futbol
                     <input type="checkbox" value="g-02" onclick="test(this)">Caballos
@@ -346,19 +378,12 @@
             <div class="buttonDeleteAll">
                 <button type="button" class="btn btn-danger" id="deleteAll">Borrar todo</button>
             </div>
-            <button id="dolarCotizacion">Cotización Dólar Hoy</button>
-            <div id="dolar"></div>
-            <button id="bitcoinCotizacion">Cotización BitCoin - U$S</button>
-            <div id="bitcoin"></div>
-            <button id="top5">Top 5 Ganadores esta semana</button>
-            <div class="topPlayers"></div>
-
         </div>
 
 
 
 
-        <footer class="bg-dark text-center text-white">
+        <footer class=" bg-dark text-center text-white">
             <!-- Grid container -->
             <div class="container p-4">
                 <!-- Section: Social media -->
@@ -470,7 +495,11 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
+        <script type="text/javascript">
+            emailjs.init('0FBKk-AEmy8Pc_idS')
+        </script>
 
 </body>
 

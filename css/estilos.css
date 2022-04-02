@@ -509,3 +509,53 @@ h2 {
 #caballosCompetencia {
   margin-left: 20px;
 }
+
+.flexApuestas {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 120px;
+}
+
+#top5 {
+  height: 40px;
+  margin-top: 40px;
+}
+
+.columnaInfoApuestas {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnatop5 {
+  display: flex;
+  flex-direction: column;
+}
+
+.estilosDolarBtc {
+  display: flex;
+  justify-content: space-between;
+}
+
+.estiloSpanDolar,
+#valorDolarPesos,
+.estiloSpanBtc,
+#valorDolarBtc {
+  font-size: 17px;
+  font-family: "Roboto";
+}
+
+.cotizacionMonedas {
+  display: flex;
+}
+
+#cotization1 {
+  margin-right: 300px;
+}
+
+#cotization2 {
+  margin-right: 100px;
+}
+
+#apuestasRealizadas {
+  margin-top: 80px;
+}

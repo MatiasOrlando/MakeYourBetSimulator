@@ -7,6 +7,12 @@ formUsuario.addEventListener("submit", (e) => {
   if (registroValido) {
     welcome();
     bonoBienvenida();
+
+    //Funcion EmailJS
+    const serviceID = "default_service";
+    const templateID = "template_cj0kp2d";
+
+    emailjs.sendForm(serviceID, templateID, formUsuario);
   }
 });
 
@@ -45,7 +51,8 @@ caballosButton.addEventListener("click", apuestasCaballosEvento);
 pokerButton.addEventListener("click", apuestasPokerEvento);
 
 //Eventos que solicitan APIS
-checkDolarValue.addEventListener("click", () => dolarValue());
-checkBitcoinValue.addEventListener("click", () => bitcoinValue());
+
+valorDelDolar.addEventListener("mouseover", () => dolarValue());
+valorBtc.addEventListener("mouseover", () => bitcoinValue());
 top5week.addEventListener("click", () => top5());
 caballosCompetencia.addEventListener("click", () => infoCarreraCaballos());
