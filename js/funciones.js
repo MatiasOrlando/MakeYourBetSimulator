@@ -10,6 +10,7 @@ function obtenerLocal() {
   listaApostadores === null && (listaApostadores = []);
 }
 
+// Funcion que me permite obtener los datos de las apuestas confirmadas almacenadas en LocalStorage
 function obtenerLocalApuestas() {
   apuestasOnGameStorage =
     JSON.parse(localStorage.getItem("Informacion Apuestas Confirmadas: ")) ||
@@ -160,12 +161,12 @@ function validarRegistro() {
   }
 }
 
-//  Funciones para calcular el precio final de apuestas
+//  Funciones involucradas para calcular el precio final de apuestas
 const taxPrice = (x) => x * 0.21;
 const suma = (a, b) => Number(a) + Number(b);
 const restaDescuentoPromocional = (a, b) => a - b;
 
-//Funcion que calcula el precio final
+//Funcion que calcula el precio final de las apuestas
 function calcularPrecioFinal(precio) {
   const priceOfTax = taxPrice(parseInt(precio));
   const priceWithTax = suma(precio, priceOfTax);
@@ -263,7 +264,10 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const bonoDiscount = document.querySelector("#priceDiscount");
     bonoDiscount.innerText = `Bono: - U$S150`;
     subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
-    apuestasRealizadasValor.innerText = `U$S${montoTotalPagar - priceDiscount}`;
+    apuestasRealizadasValor.innerText = `U$S${restaDescuentoPromocional(
+      montoTotalPagar,
+      priceDiscount
+    )}`;
 
     tbody1.appendChild(apuestaNueva);
     tablaApuestas.appendChild(tbody1);
@@ -278,7 +282,6 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         (apuesta) => apuesta.id === idApuesta
       );
 
-      console.log(apuestaElegidaBorrar);
       if (apuestaElegidaBorrar) {
         const index = apuestas.indexOf(apuestaElegidaBorrar);
 
@@ -302,9 +305,10 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       montoTotalPagar -= valorFinalDeApuesta;
       subTotalApuestas.innerText = `Subtotal: U$S${montoTotalPagar}`;
       if (apuestas.length >= 1) {
-        apuestasRealizadasValor.innerText = `U$S${
-          montoTotalPagar - priceDiscount
-        }`;
+        apuestasRealizadasValor.innerText = `U$S${restaDescuentoPromocional(
+          montoTotalPagar,
+          priceDiscount
+        )}`;
       } else {
         apuestasRealizadasValor.innerText = `U$S${montoTotalPagar}`;
       }
@@ -341,6 +345,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         (apuesta) => apuesta.categoria == "Futbol"
       );
     }
+
     //Funcion filtrar apuestas realizadas Categoria Caballos
     function filterCaballos() {
       return apuestas.filter((apuesta) => apuesta.categoria == "Caballos");
@@ -569,11 +574,7 @@ function dolarValue() {
     .then((json) => {
       mostrarInfo(json);
     })
-    .catch(() => errorApiDolar());
-
-  function errorApiDolar() {
-    swal(`Valores momentáneamente no disponibles`);
-  }
+    .catch(() => swal(`Valores momentáneamente no disponibles`));
 
   function mostrarInfo(data) {
     let valorDolarOficial = data
@@ -585,6 +586,7 @@ function dolarValue() {
     valorDelDolar.innerHTML = valorDolarOficial;
   }
 }
+
 // Funcion API Bitcoin
 function bitcoinValue() {
   let url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD";
@@ -698,7 +700,7 @@ function infoCarreraCaballos() {
   }
 }
 
-//Funcion EmailJS
+//Funcion API EmailJS
 function emailJs() {
   const serviceID = "default_service";
   const templateID = "template_cj0kp2d";

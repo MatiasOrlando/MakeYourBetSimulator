@@ -48,7 +48,6 @@ class Reloj {
 let idApuesta = 0;
 let datosApostador;
 const priceDiscount = 150;
-let priceFinalDiscount;
 const usuarioApostador = [];
 let listaApostadores = [];
 let registroValido = false;
@@ -59,8 +58,6 @@ let desplegarMenuPoker = true;
 let apuestasOnGameStorage = [];
 let onlineBet = [];
 let nodoTop5;
-let testDolar = true;
-let testBitcoin = true;
 let top5Winners = true;
 let infoHorses = true;
 

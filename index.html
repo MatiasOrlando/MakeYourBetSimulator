@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Make your Bet Simulador</title>
 </head>
-<header>
+<header class="mainHead">
     <h1 id="mainTitle" class="animate__animated animate__backInLeft">MAKE YOUR BET<div class="darkModeButton"><button
                 type="button" class="btn btn-secondary" id="darkMode"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                     height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
@@ -24,16 +24,12 @@
                 </svg>Dark Mode</button>
         </div>
     </h1>
-
 </header>
 
 <body>
-
     <main>
         <div class="contenedorDos">
-
             <div>
-
                 <img class="onlineGames"
                     src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/0fbb2e62997361.5f9eb4955a2b1.png"
                     alt="Online Bet Games">
@@ -84,14 +80,12 @@
                                     <label for="inputTime" class="form-label">Horario Apuesta</label>
                                     <input type="time" class="form-control" id="inputTime1" required>
                                 </div>
-
                                 <div class="main_div">
                                     <button type="submit" id="buttonForm1">Registrarme</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-
                 </section>
                 <div class="textoInicial">
                     <div class="fuenteMake">¿POR QUÉ ELEGIR MAKE YOUR BET? </div>
@@ -170,14 +164,11 @@
                 </div>
             </div>
         </div>
-
-
         <div class="perfilCentrado3">
             <div class="perfilDesign">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-auto">
-
                         </div>
                         <div class="col">
                             <div id="datos">
@@ -195,7 +186,6 @@
                                 <button type="button" class="btn btn-outline-dark mb-4" id="buttonCaballos1">
                                     Ver más
                                 </button>
-
                             </div>
                         </div>
                     </div>
@@ -205,7 +195,6 @@
                 </div>
             </div>
         </div>
-
         <section class="probando">
             <div class="topo">
                 <div>
@@ -253,7 +242,6 @@
                             Apuesta ahora
                         </button>
                     </div>
-
                 </div>
             </div>
             <div class="topo">
@@ -281,14 +269,11 @@
                 </div>
             </div>
         </section>
-
         <div id="categoriaApuesta" style="display: none;">
             <div class="flexApuestas">
                 <div class="columnaInfoApuestas">
                     <h4 id="tituloApuesta">
                     </h4>
-
-
                     <ul class="valoresDeApuesta">
                         <li><button type="button" class="btn btn-dark" id="apuestaValor1"></button></li>
                         <li><button type="button" class="btn btn-dark" id="apuestaValor2"></button></li>
@@ -302,10 +287,7 @@
                 </div>
             </div>
         </div>
-
-
         <div style="display: none;" id="apuestasRealizadas">
-
             <div class="estilosDolarBtc">
                 <h4 class="madeBets">Apuestas realizadas:
                 </h4>
@@ -330,7 +312,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="filter" id="divfiltroDeApuestas">
                 <button type="button" class="btn btn-primary" id="filterButton">Filtrar por categoría</button>
                 <div class="checkBoxFil">
@@ -339,7 +320,6 @@
                     <input type="checkbox" value="g-03" onclick="test(this)">Poker
                 </div>
             </div>
-
             <br>
             <p id="g-01" style="display:none">
             </p>
@@ -347,8 +327,6 @@
             </p>
             <p id="g-03" style="display:none">
             </p>
-
-
             <table id="tableApuestas">
                 <thead>
                     <tr>
@@ -360,10 +338,8 @@
                     </tr>
                 </thead>
                 <tbody id="tBody">
-
                 </tbody>
             </table>
-
             <div id="montosApuestas">
                 <div id="infoApuestas">
                     <div><span id="montoSubtotalApuestas"></span></div>
@@ -371,7 +347,6 @@
                     <div id="montoTotalBet">Monto total: <span id="montoTotalApuestas"></span></div>
                 </div>
             </div>
-
             <div class="buttonConfirmAllBets">
                 <button type="button" class="btn btn-primary" id="confirmBet">Confirmar Apuestas</button>
             </div>
@@ -379,10 +354,6 @@
                 <button type="button" class="btn btn-danger" id="deleteAll">Borrar todo</button>
             </div>
         </div>
-
-
-
-
         <footer class=" bg-dark text-center text-white">
             <!-- Grid container -->
             <div class="container p-4">
@@ -480,7 +451,6 @@
             </div>
             <!-- Copyright -->
         </footer>
-
         <script src="./js/clasesyselectores.js">
         </script>
         <script src="./js/funciones.js">
@@ -496,11 +466,9 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
         <script type="text/javascript">
             emailjs.init('0FBKk-AEmy8Pc_idS')
         </script>
-
 </body>
 
 
