@@ -697,3 +697,11 @@ function infoCarreraCaballos() {
     infoHorses = true;
   }
 }
+
+//Funcion EmailJS
+function emailJs() {
+  const serviceID = "default_service";
+  const templateID = "template_cj0kp2d";
+
+  emailjs.sendForm(serviceID, templateID, formUsuario);
+}

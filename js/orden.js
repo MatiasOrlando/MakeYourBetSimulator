@@ -7,12 +7,7 @@ formUsuario.addEventListener("submit", (e) => {
   if (registroValido) {
     welcome();
     bonoBienvenida();
-
-    //Funcion EmailJS
-    const serviceID = "default_service";
-    const templateID = "template_cj0kp2d";
-
-    emailjs.sendForm(serviceID, templateID, formUsuario);
+    emailJs();
   }
 });
 
