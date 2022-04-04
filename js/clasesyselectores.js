@@ -36,11 +36,8 @@ class Reloj {
   constructor(hora) {
     this.hora = hora;
   }
-  mostrarHora = () => {
-    alert("Usted ha elegido el siguiente horario: " + this.hora);
-  };
   estaAbierto = () => {
-    return parseInt(this.hora) >= 8 && parseInt(this.hora) <= 24;
+    return parseInt(this.hora) >= 5 && parseInt(this.hora) <= 24;
   };
 }
 

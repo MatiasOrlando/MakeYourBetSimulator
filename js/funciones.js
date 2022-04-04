@@ -1,3 +1,17 @@
+// Funcion Dark mode
+function myDarkMode() {
+  const valorLiveDolaresAPesos = document.querySelector(".estiloSpanDolar");
+  const valorLiveBtcAdolares = document.querySelector(".estiloSpanBtc");
+
+  valorLiveDolaresAPesos.style.color = "black";
+  valorLiveBtcAdolares.style.color = "black";
+  valorDelDolar.style.color = "black";
+  valorBtc.style.color = "black";
+
+  let element = document.body;
+  element.classList.toggle("dark-mode");
+}
+
 //Funcion para guardar datos en localStorage
 const guardarLocal = (categoria, valor) => {
   localStorage.setItem(categoria, valor);
@@ -40,7 +54,7 @@ function leerDatos() {
   usuarioApostador.push(datosApostador);
 }
 
-// Funcion Bienvenida
+// Funcion Welcome
 function welcome() {
   obtenerLocal();
   obtenerLocalApuestas();
@@ -97,6 +111,21 @@ function welcome() {
   }
 }
 
+// Funcion Bono Bienvenida
+function bonoBienvenida() {
+  setTimeout(() => {
+    const bono = document.createElement("div");
+    bono.setAttribute("id", "bonoBienvenida");
+    bono.setAttribute("class", "animate__animated animate__bounceInDown");
+    const bonoTexto = document.createElement("span");
+    bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
+    bonoTexto.innerText = `Disfruta hoy tu bono de bienvenida: U$S150`;
+    bono.appendChild(bonoTexto);
+    const formInicial = document.querySelector(".formText");
+    formInicial.insertAdjacentElement("afterend", bono);
+  }, 2500);
+}
+
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
 function validarRegistro() {
   const { edad, mail } = datosApostador;
@@ -125,7 +154,7 @@ function validarRegistro() {
     if (!horarioHabilitado) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText = "Para apostar solo en horarios habilitados: 8-24";
+      invalidTime.innerText = "Para apostar solo en horarios habilitados: 5-24";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
@@ -568,35 +597,6 @@ function apuestasPokerEvento() {
     pokerButton.innerText = "Ver mas";
     desplegarMenuPoker = true;
   }
-}
-
-// Funcion Dark mode
-function myDarkMode() {
-  const valorLiveDolaresAPesos = document.querySelector(".estiloSpanDolar");
-  const valorLiveBtcAdolares = document.querySelector(".estiloSpanBtc");
-
-  valorLiveDolaresAPesos.style.color = "black";
-  valorLiveBtcAdolares.style.color = "black";
-  valorDelDolar.style.color = "black";
-  valorBtc.style.color = "black";
-
-  let element = document.body;
-  element.classList.toggle("dark-mode");
-}
-
-// Funcion Bono Bienvenida
-function bonoBienvenida() {
-  setTimeout(() => {
-    const bono = document.createElement("div");
-    bono.setAttribute("id", "bonoBienvenida");
-    bono.setAttribute("class", "animate__animated animate__bounceInDown");
-    const bonoTexto = document.createElement("span");
-    bonoTexto.setAttribute("class", "bonoBienvenidaTexto");
-    bonoTexto.innerText = `Disfruta hoy tu bono de bienvenida: U$S150`;
-    bono.appendChild(bonoTexto);
-    const formInicial = document.querySelector(".formText");
-    formInicial.insertAdjacentElement("afterend", bono);
-  }, 2500);
 }
 
 // Funcion API Dolar
