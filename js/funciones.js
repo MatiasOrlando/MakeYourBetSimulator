@@ -589,7 +589,7 @@ function bonoBienvenida() {
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
-  }, 2200);
+  }, 2500);
 }
 
 // Funcion API Dolar
