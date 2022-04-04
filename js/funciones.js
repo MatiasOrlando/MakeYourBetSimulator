@@ -78,7 +78,7 @@ function welcome() {
   divBienvenida.appendChild(fraseBienvenida);
   registro.appendChild(divBienvenida);
 
-  setTimeout(() => Bienvenida(), 3000);
+  setTimeout(() => Bienvenida(), 1900);
 
   function Bienvenida() {
     tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
@@ -589,7 +589,7 @@ function bonoBienvenida() {
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
-  }, 4200);
+  }, 2200);
 }
 
 // Funcion API Dolar
