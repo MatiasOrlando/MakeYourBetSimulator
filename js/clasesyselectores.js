@@ -37,7 +37,7 @@ class Reloj {
     this.hora = hora;
   }
   estaAbierto = () => {
-    return parseInt(this.hora) >= 5 && parseInt(this.hora) <= 24;
+    return parseInt(this.hora) >= 6 && parseInt(this.hora) <= 24;
   };
 }
 

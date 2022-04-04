@@ -154,7 +154,7 @@ function validarRegistro() {
     if (!horarioHabilitado) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText = "Para apostar solo en horarios habilitados: 5-24";
+      invalidTime.innerText = "Para apostar solo en horarios habilitados: 6-24";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
@@ -163,7 +163,8 @@ function validarRegistro() {
     if (hora != localHour) {
       const invalidTime = document.createElement("h2");
       invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText = "Debe ingresar el horario actual de la Argentina";
+      invalidTime.innerText =
+        "Debe ingresar el horario actual de la Argentina formato 24 horas";
       tituloFormRegistro.remove();
       formUsuarioApostador.remove();
       formRegistro.appendChild(invalidTime);
