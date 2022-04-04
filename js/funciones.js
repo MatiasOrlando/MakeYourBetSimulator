@@ -60,21 +60,41 @@ function welcome() {
   let registro = document.querySelector(".registro");
   let tituloBienvenida = document.createElement("h2");
 
-  tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
-  fraseBienvenida.innerText = `Nombre Completo: ${nombre} ${apellido}
+  tituloBienvenida.innerText = `Cargando datos`;
+  fraseBienvenida.innerHTML = `<div id="floatingCirclesG">
+	<div class="f_circleG" id="frotateG_01"></div>
+	<div class="f_circleG" id="frotateG_02"></div>
+	<div class="f_circleG" id="frotateG_03"></div>
+	<div class="f_circleG" id="frotateG_04"></div>
+	<div class="f_circleG" id="frotateG_05"></div>
+	<div class="f_circleG" id="frotateG_06"></div>
+	<div class="f_circleG" id="frotateG_07"></div>
+	<div class="f_circleG" id="frotateG_08"></div>
+</div>`;
+
+  tituloBienvenida.classList.add("tituloWelcome");
+  fraseBienvenida.style.marginTop = "50px";
+  divBienvenida.appendChild(tituloBienvenida);
+  divBienvenida.appendChild(fraseBienvenida);
+  registro.appendChild(divBienvenida);
+
+  setTimeout(() => Bienvenida(), 3000);
+
+  function Bienvenida() {
+    tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
+    fraseBienvenida.innerText = `Nombre Completo: ${nombre} ${apellido}
         Edad: ${edad}
         Mail: ${mail}
         Ciudad: ${ciudad}
         País: ${pais}
         Gracias por registrarte, es hora de jugar.`;
-
-  fraseBienvenida.classList.add("presentation");
-  tituloBienvenida.classList.add("tituloWelcome");
-  divBienvenida.style.paddingTop = "30px";
-  divBienvenida.style.paddingLeft = "10px";
-  divBienvenida.appendChild(tituloBienvenida);
-  divBienvenida.appendChild(fraseBienvenida);
-  registro.appendChild(divBienvenida);
+    fraseBienvenida.style.marginTop = "20px";
+    fraseBienvenida.classList.add("presentation");
+    tituloBienvenida.classList.add("tituloWelcome");
+    divBienvenida.style.paddingTop = "30px";
+    divBienvenida.style.paddingLeft = "10px";
+    registro.appendChild(divBienvenida);
+  }
 }
 
 // Funcion que valida la informacion ingresada en el formulario para poder apostar
@@ -569,7 +589,7 @@ function bonoBienvenida() {
     bono.appendChild(bonoTexto);
     const formInicial = document.querySelector(".formText");
     formInicial.insertAdjacentElement("afterend", bono);
-  }, 1000);
+  }, 4200);
 }
 
 // Funcion API Dolar
