@@ -308,14 +308,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         apuestas.splice(index, 1);
 
         let futFil = filterFutbol().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
         });
 
         let cabFil = filterCaballos().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
         });
         let pokFil = filterPoker().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
         });
 
         futbolBetting.innerText = futFil;
@@ -340,15 +340,15 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const pokerBetting = document.querySelector("#g-03");
 
     let futFilter = filterFutbol().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
     });
 
     let cabFilter = filterCaballos().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
     });
 
     let pokFilter = filterPoker().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
     });
 
     futbolBetting.innerText = futFilter;
@@ -414,14 +414,14 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       apuestaNueva.remove();
       swal("Todas las apuestas han sido borradas");
       let futFil2 = filterFutbol2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
       });
 
       let cabFil2 = filterCaballos2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
       });
       let pokFil2 = filterPoker2().map(function (bet) {
-        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Apuesta: ${bet.hora}\n`;
+        return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
       });
 
       futbolBetting.innerText = futFil2;
@@ -451,9 +451,16 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
               "Informacion Apuestas Confirmadas: ",
               JSON.stringify(apuestasOnGameStorage)
             );
-            swal("Felicitaciones, tus apuestas han sido confirmadas", {
-              icon: "success",
-            });
+            swal(
+              `Felicitaciones, tus apuestas han sido confirmadas. 
+               Valor Total: U$S${restaDescuentoPromocional(
+                 montoTotalPagar,
+                 priceDiscount
+               )}`,
+              {
+                icon: "success",
+              }
+            );
           } else {
             swal("Apuestas canceladas, vuelva pronto", { icon: "error" });
             datosApostador.apuestas = [];
