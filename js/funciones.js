@@ -545,11 +545,17 @@ function apuestasPokerEvento() {
 
 // Funcion Dark mode
 function myDarkMode() {
+  const valorLiveDolaresAPesos = document.querySelector(".estiloSpanDolar");
+  const valorLiveBtcAdolares = document.querySelector(".estiloSpanBtc");
+
+  valorLiveDolaresAPesos.style.color = "black";
+  valorLiveBtcAdolares.style.color = "black";
+  valorDelDolar.style.color = "black";
+  valorBtc.style.color = "black";
+
   let element = document.body;
   element.classList.toggle("dark-mode");
 }
-const dark = document.querySelector("#darkMode");
-dark.addEventListener("click", myDarkMode);
 
 // Funcion Bono Bienvenida
 function bonoBienvenida() {

@@ -1,5 +1,7 @@
 // Orden de Ejecución Eventos
 
+dark.addEventListener("click", myDarkMode);
+
 formUsuario.addEventListener("submit", (e) => {
   e.preventDefault();
   leerDatos();

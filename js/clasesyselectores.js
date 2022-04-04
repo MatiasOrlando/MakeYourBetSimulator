@@ -84,3 +84,4 @@ const top5week = document.querySelector("#top5");
 const botonCaballosCompetencia = document.querySelector("#caballosCompetencia");
 const valorDelDolar = document.querySelector("#valorDolarPesos");
 const valorBtc = document.querySelector("#valorDolarBtc");
+const dark = document.querySelector("#darkMode");
