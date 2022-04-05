@@ -160,16 +160,16 @@ function validarRegistro() {
       formRegistro.appendChild(invalidTime);
       return false;
     }
-    // if (hora != localHour) {
-    //   const invalidTime = document.createElement("h2");
-    //   invalidTime.classList.add("tituloWelcomeInvalidAge");
-    //   invalidTime.innerText =
-    //     "Debe ingresar el horario actual de la Argentina formato 24 horas";
-    //   tituloFormRegistro.remove();
-    //   formUsuarioApostador.remove();
-    //   formRegistro.appendChild(invalidTime);
-    //   return false;
-    // }
+    if (hora != localHour) {
+      const invalidTime = document.createElement("h2");
+      invalidTime.classList.add("tituloWelcomeInvalidAge");
+      invalidTime.innerText =
+        "Debe ingresar el horario actual de la Argentina formato 24 horas";
+      tituloFormRegistro.remove();
+      formUsuarioApostador.remove();
+      formRegistro.appendChild(invalidTime);
+      return false;
+    }
     if (!validarCorreo(mail)) {
       const invalidMail = document.createElement("h2");
       invalidMail.classList.add("tituloWelcomeInvalidAge");
