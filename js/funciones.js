@@ -92,9 +92,9 @@ function welcome() {
   divBienvenida.appendChild(fraseBienvenida);
   registro.appendChild(divBienvenida);
 
-  setTimeout(() => Bienvenida(), 1900);
+  setTimeout(() => bienvenida(), 1900);
 
-  function Bienvenida() {
+  function bienvenida() {
     tituloBienvenida.innerText = `BIENVENIDO A MAKE YOUR BET`;
     fraseBienvenida.innerText = `Nombre Completo: ${nombre} ${apellido}
         Edad: ${edad}
@@ -160,16 +160,16 @@ function validarRegistro() {
       formRegistro.appendChild(invalidTime);
       return false;
     }
-    if (hora != localHour) {
-      const invalidTime = document.createElement("h2");
-      invalidTime.classList.add("tituloWelcomeInvalidAge");
-      invalidTime.innerText =
-        "Debe ingresar el horario actual de la Argentina formato 24 horas";
-      tituloFormRegistro.remove();
-      formUsuarioApostador.remove();
-      formRegistro.appendChild(invalidTime);
-      return false;
-    }
+    // if (hora != localHour) {
+    //   const invalidTime = document.createElement("h2");
+    //   invalidTime.classList.add("tituloWelcomeInvalidAge");
+    //   invalidTime.innerText =
+    //     "Debe ingresar el horario actual de la Argentina formato 24 horas";
+    //   tituloFormRegistro.remove();
+    //   formUsuarioApostador.remove();
+    //   formRegistro.appendChild(invalidTime);
+    //   return false;
+    // }
     if (!validarCorreo(mail)) {
       const invalidMail = document.createElement("h2");
       invalidMail.classList.add("tituloWelcomeInvalidAge");
@@ -638,7 +638,6 @@ function bitcoinValue() {
       swal(`Valor momentáneamente no disponible`);
     }
   };
-
   datosCripto();
 }
 // Funcion APi JSONplaceholder fakeusers top5

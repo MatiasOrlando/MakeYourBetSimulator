@@ -48,7 +48,6 @@ caballosButton.addEventListener("click", apuestasCaballosEvento);
 pokerButton.addEventListener("click", apuestasPokerEvento);
 
 //Eventos que solicitan APIS
-
 valorDelDolar.addEventListener("mouseover", () => dolarValue());
 valorBtc.addEventListener("mouseover", () => bitcoinValue());
 top5week.addEventListener("click", () => top5());
