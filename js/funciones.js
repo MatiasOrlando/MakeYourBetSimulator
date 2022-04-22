@@ -278,10 +278,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     const divApuestasRealizadas = document.querySelector("#apuestasRealizadas");
     divApuestasRealizadas.style.display = "block";
     const tablaApuestas = document.querySelector("#tableApuestas");
-    tablaApuestas.setAttribute(
-      "class",
-      "table table-hover table-bordered table-dark"
-    );
+    tablaApuestas.setAttribute("class", "table table-hover table-bordered");
     const tbody1 = document.querySelector("#tBody");
     const apuestaNueva = document.createElement("tr");
 
@@ -337,8 +334,8 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
         apuestas.splice(index, 1);
 
-        let futFil = filterFutbol().map(function (bet) {
-          return ` Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
+        let futFil = filterFutbol().map(({ categoria, valor, hora }) => {
+          return ` Categoria: ${categoria}, Monto: U$S${valor}, Horario de Inicio: ${hora}\n`;
         });
 
         let cabFil = filterCaballos().map(function (bet) {
