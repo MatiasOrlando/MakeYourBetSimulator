@@ -298,6 +298,18 @@ h2 {
   flex-direction: row;
 }
 
+.tBodyContent {
+  color: black;
+}
+
+.tBodyDark {
+  color: white;
+}
+
+.titulosTablaApuestas2 {
+  color: white;
+}
+
 .dark-mode {
   background-color: black;
   color: white;
@@ -354,6 +366,7 @@ h2 {
   font-size: 20px;
   font-family: "Roboto";
   padding: 20px;
+  margin-right: 25px;
 }
 
 #darkMode {
@@ -732,4 +745,13 @@ h2 {
   100% {
     background-color: rgb(255, 255, 255);
   }
+}
+
+.tableBet {
+  display: flex;
+  justify-content: center;
+}
+
+.tableBetContent {
+  width: 85%;
 }

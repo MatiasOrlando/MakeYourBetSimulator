@@ -82,3 +82,4 @@ const botonCaballosCompetencia = document.querySelector("#caballosCompetencia");
 const valorDelDolar = document.querySelector("#valorDolarPesos");
 const valorBtc = document.querySelector("#valorDolarBtc");
 const dark = document.querySelector("#darkMode");
+const tableBet = document.querySelector(".tableBet");

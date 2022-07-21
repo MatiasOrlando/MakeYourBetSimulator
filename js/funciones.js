@@ -1,4 +1,5 @@
 // Funcion Dark mode
+
 function myDarkMode() {
   const valorLiveDolaresAPesos = document.querySelector(".estiloSpanDolar");
   const valorLiveBtcAdolares = document.querySelector(".estiloSpanBtc");
@@ -7,6 +8,12 @@ function myDarkMode() {
   valorLiveBtcAdolares.style.color = "black";
   valorDelDolar.style.color = "black";
   valorBtc.style.color = "black";
+
+  let titulosTablaApuestas = document.querySelector(".titulosTablaApuestas");
+  titulosTablaApuestas.classList.toggle("titulosTablaApuestas2");
+
+  let tableBody = document.querySelector(".tBodyContent");
+  tableBody.classList.toggle("tBodyDark");
 
   let element = document.body;
   element.classList.toggle("dark-mode");
@@ -279,7 +286,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     divApuestasRealizadas.style.display = "block";
     const tablaApuestas = document.querySelector("#tableApuestas");
     tablaApuestas.setAttribute("class", "table table-hover table-bordered");
-    const tbody1 = document.querySelector("#tBody");
+
     const apuestaNueva = document.createElement("tr");
 
     const valorFinalDeApuesta = calcularPrecioFinal(
@@ -315,7 +322,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
       montoTotalPagar,
       priceDiscount
     )}`;
-
+    const tbody1 = document.querySelector("#tBody");
     tbody1.appendChild(apuestaNueva);
     tablaApuestas.appendChild(tbody1);
 
@@ -335,7 +342,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
         apuestas.splice(index, 1);
 
         let futFil = filterFutbol().map(({ categoria, valor, hora }) => {
-          return ` Categoria: ${categoria}, Monto: U$S${valor}, Horario de Inicio: ${hora}\n`;
+          return `Categoria: ${categoria}, Monto: U$S${valor}, Horario de Inicio: ${hora} \n`;
         });
 
         let cabFil = filterCaballos().map(function (bet) {
@@ -375,7 +382,7 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
     });
 
     let pokFilter = filterPoker().map(function (bet) {
-      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora}\n`;
+      return `Categoria: ${bet.categoria}, Monto: U$S${bet.valor}, Horario de Inicio: ${bet.hora} \n`;
     });
 
     futbolBetting.innerText = futFilter;
@@ -422,12 +429,12 @@ function desplegarApuestas(valor1, valor2, valor3, titulo, categoria) {
 
     function filtrarApuestas() {
       if (filter) {
-        tablaApuestas.remove();
+        tableBet.remove();
         filterButton.innerText = "Ver todas las apuestas";
         filter = false;
       } else {
         filterButton.innerText = "Filtrar por Categoría";
-        montosApuestas.insertAdjacentElement("beforebegin", tablaApuestas);
+        montosApuestas.insertAdjacentElement("beforebegin", tableBet);
         filter = true;
       }
     }
@@ -600,6 +607,7 @@ function apuestasPokerEvento() {
 // Funcion API Dolar
 function dolarValue() {
   let url = "https://www.dolarsi.com/api/api.php?type=valoresprincipales";
+
   fetch(url)
     .then((res) => res.json())
     .then((json) => {
